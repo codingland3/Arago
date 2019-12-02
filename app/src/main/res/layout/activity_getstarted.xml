@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chào mừng đến với Arago!"
+        android:fontFamily="sans-serif"
+        android:textSize="27dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/wellcome"/>
+
+    <LinearLayout
+        android:layout_below="@+id/tv_welcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/getstarted"
+            android:layout_marginTop="40dp"
+            android:padding="10dp"/>
+
+        // Button
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#525252"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="50dp"
+            android:text="Đăng nhập ngay"
+            android:onClick="clickLogin"
+            android:background="@drawable/lightgray_fill_rounded_color" />
+
+        // Button
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Tiếp tục với Facebook"
+            android:onClick="clickLoginFB"
+            android:background="@drawable/fb_fill__rounded_color" />
+
+        // Forgot
+        <TextView
+            android:onClick="clickToRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#039BE5"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="center"
+            android:text="Đăng ký tài khoản miễn phí" />
+
+    </LinearLayout>
+
+</RelativeLayout>

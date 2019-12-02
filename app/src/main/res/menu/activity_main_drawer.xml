@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_menu_about"
+            android:title="Về chúng tôi ?" />
+
+        <item
+            android:id="@+id/nav_policy"
+            android:icon="@drawable/ic_menu_policy"
+            android:title="Chính sách và cam kết" />
+
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Chia sẻ" />
+
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_menu_help"
+            android:title="Trợ giúp" />
+
+        <item
+            android:id="@+id/nav_dark_mode"
+            android:icon="@android:drawable/ic_menu_day"
+            android:title="Chuyển chế độ xem" />
+    </group>
+
+</menu>

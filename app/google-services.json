@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "710613446536",
+    "firebase_url": "https://arago-89d6a.firebaseio.com",
+    "project_id": "arago-89d6a",
+    "storage_bucket": "arago-89d6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710613446536:android:73f4bd7aec011d24cb943d",
+        "android_client_info": {
+          "package_name": "com.example.arago"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710613446536-gbqlcvtvnjdg6lsli9pl8sitka0o1p00.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.arago",
+            "certificate_hash": "95d372b8fa3e71690438f842142d805b76ea053d"
+          }
+        },
+        {
+          "client_id": "710613446536-q8fvi3nc0bgbf7knfs27ddt1peh7ntif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnKGBsEq1RmrlmbuvKrzMmWQDy32r8K_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710613446536-q8fvi3nc0bgbf7knfs27ddt1peh7ntif.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
