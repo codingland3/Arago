@@ -19,6 +19,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.arago.ADMIN.CustomerFragment;
 import com.example.arago.USER.AboutUsActivity;
 import com.example.arago.USER.BottomNavigationBehavior;
 import com.example.arago.USER.DarkModePrefManager;
@@ -27,6 +28,7 @@ import com.example.arago.USER.Fragment.FragmentHome;
 import com.example.arago.USER.HelpActivity;
 import com.example.arago.USER.PolicyActivity;
 import com.example.arago.USER.UserActivity;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView bottomNavigationView;
     private static final int MODE_DARK = 0;
     private static final int MODE_LIGHT = 1;
+    ShareDialog shareDialog;
 
     // BottomNav
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -44,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
             switch (item.getItemId()) {
+                case R.id.navigationCustomer:
+                    fragment = new CustomerFragment();
+                    break;
                 case R.id.navigationHistory:
                     fragment = new FragmentHistory();
                     break;
@@ -76,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // BottomNav
@@ -88,6 +94,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         bottomNavigationView.setSelectedItemId(R.id.navigationHome);
         //handling floating action menu
+
+//        shareDialog = new ShareDialog(this);
+//        Bundle inBundle = getIntent().getExtras();
+//        String name = inBundle.get("name").toString();
+//        String surname = inBundle.get("surname").toString();
+//        String imageUrl = inBundle.get("imageUrl").toString();
+//
+//        TextView nameView = (TextView) findViewById(R.id.textViewUser);
+//        nameView.setText("Hello " + surname);
 
     }
 

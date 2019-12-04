@@ -50,12 +50,12 @@
             android:background="@drawable/lightgray_fill_rounded_color" />
 
         // Button
-        <TextView
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:textColor="#FFFFFF"
-            android:layout_gravity="center"
             android:gravity="center"
             android:paddingTop="14dp"
             android:paddingBottom="14dp"
@@ -63,8 +63,7 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
             android:text="Tiếp tục với Facebook"
-            android:onClick="clickLoginFB"
-            android:background="@drawable/fb_fill__rounded_color" />
+            android:onClick="clickLoginFB" />
 
         // Forgot
         <TextView

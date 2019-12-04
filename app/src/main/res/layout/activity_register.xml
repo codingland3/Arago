@@ -43,7 +43,7 @@
 
             <!-- INPUT -->
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/register_name"
                 android:hint="Họ và tên"
                 android:textSize="15sp"
                 android:paddingLeft="10dp"
@@ -51,7 +51,7 @@
                 android:maxLines="1"
                 android:inputType="textPersonName"
                 android:paddingBottom="15dp"
-                android:maxLength="10"
+                android:maxLength="30"
                 android:textCursorDrawable="@drawable/cursor_color"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
@@ -69,7 +69,7 @@
 
             <!-- INPUT -->
             <EditText
-                android:id="@+id/username_input"
+                android:id="@+id/register_email"
                 android:hint="Email"
                 android:textSize="15sp"
                 android:paddingLeft="10dp"
@@ -94,7 +94,7 @@
 
             <!-- INPUT -->
             <EditText
-                android:id="@+id/pass"
+                android:id="@+id/register_pass"
                 android:hint="Mật khẩu"
                 android:textSize="15sp"
                 android:paddingLeft="10dp"
@@ -120,7 +120,7 @@
 
             <!-- INPUT -->
             <EditText
-                android:id="@+id/confirm_pass"
+                android:id="@+id/register_confirm_pass"
                 android:hint="Nhập lại mật khẩu"
                 android:textSize="15sp"
                 android:paddingLeft="10dp"
@@ -146,7 +146,7 @@
 
             <!-- INPUT -->
             <EditText
-                android:id="@+id/address"
+                android:id="@+id/register_address"
                 android:hint="Địa chỉ hiện tại"
                 android:textSize="15sp"
                 android:paddingLeft="10dp"
@@ -172,7 +172,7 @@
 
             <!-- INPUT -->
             <EditText
-                android:id="@+id/phone"
+                android:id="@+id/register_phone"
                 android:hint="Số điện thoại liên lạc"
                 android:textSize="15sp"
                 android:paddingLeft="10dp"

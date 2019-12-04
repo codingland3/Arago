@@ -1,22 +1,52 @@
 package com.example.arago;
 
 import android.content.Intent;
+import android.location.Address;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.arago.USER.Model.Customer;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class RegisterActivity extends AppCompatActivity {
+
+    private EditText _txtFullName, _txtEmail, _txtPass, _txtPassConfirm, _txtAddress, _txtPhone;
+    private ImageView _ivAvatar;
+    private ProgressBar progressBar;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         changeStatusBar(getWindow());
+        init();
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mAuth.getCurrentUser() != null){
+            // handle the already login user
+        }
     }
 
     public void changeStatusBar(Window window) {
@@ -36,6 +66,121 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void clickCreateAccount(View view) {
-        Toast.makeText(RegisterActivity.this, "Tạo thành công", Toast.LENGTH_SHORT).show();
+        registerUser();
+    }
+
+    public void init(){
+        _txtFullName = (EditText) findViewById(R.id.register_name);
+        _txtEmail = (EditText) findViewById(R.id.register_email);
+        _txtPass = (EditText) findViewById(R.id.register_pass);
+        _txtPassConfirm = (EditText) findViewById(R.id.register_confirm_pass);
+        _txtPhone = (EditText) findViewById(R.id.register_phone);
+        _txtAddress = (EditText) findViewById(R.id.register_address);
+    }
+
+    private void registerUser() {
+        final String name = _txtFullName.getText().toString().trim();
+        final String email = _txtEmail.getText().toString().trim();
+        final String password = _txtPass.getText().toString().trim();
+        final String confirm_password = _txtPassConfirm.getText().toString().trim();
+        final String address = _txtAddress.getText().toString().trim();
+        final String phone = _txtPhone.getText().toString().trim();
+//        final int image = Integer.parseInt(_ivAvatar.getResources().toString().trim());
+        final int image = R.drawable.emthree;
+
+        if (name.isEmpty()) {
+            _txtFullName.setError("Không được bỏ trống họ tên");
+            _txtFullName.requestFocus();
+            return;
+        }
+
+        if (email.isEmpty()) {
+            _txtEmail.setError("Không được bỏ trống Email");
+            _txtEmail.requestFocus();
+            return;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            _txtEmail.setError("Địa chỉ Email không chính xác");
+            _txtEmail.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()) {
+            _txtPass.setError("Không được bỏ trống mật khẩu");
+            _txtPass.requestFocus();
+            return;
+        }
+
+        if (password.length() < 6) {
+            _txtPass.setError("Độ dài mật khẩu ít nhất từ 6 kí tự");
+            _txtPass.requestFocus();
+            return;
+        }
+
+        if (confirm_password.length() < 6) {
+            _txtPassConfirm.setError("Độ dài mật khẩu ít nhất từ 6 kí tự");
+            _txtPassConfirm.requestFocus();
+            return;
+        }
+
+        if (password.equals(confirm_password)) {
+            if (address.isEmpty()) {
+                _txtAddress.setError("Không được bỏ trống địa chỉ");
+                _txtAddress.requestFocus();
+                return;
+            }
+
+            if (address.length() <= 10) {
+                _txtAddress.setError("Địa chỉ không chính xác");
+                _txtAddress.requestFocus();
+                return;
+            }
+
+            if (phone.isEmpty()) {
+                _txtPhone.setError("Không được bỏ trống số điện thoại");
+                _txtPhone.requestFocus();
+                return;
+            }
+
+            if (phone.length() != 10) {
+                _txtPhone.setError("Số điện thoại không chính xác");
+                _txtPhone.requestFocus();
+                return;
+            }
+
+//            progressBar.setVisibility(View.VISIBLE);
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+//                            progressBar.setVisibility(View.GONE);
+                            if (task.isSuccessful()) {
+                                Customer customer = new Customer(image, name, email, password, address, phone);
+                                FirebaseDatabase.getInstance().getReference("Customer").child(
+                                        FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(customer)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+//                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);    // không khả thi
+//                                        intent.putExtra("id", name);
+//                                        startActivity(intent);
+                                                } else {
+                                                    Toast.makeText(RegisterActivity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+
+                            } else {
+                                Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        } else {
+            _txtPassConfirm.setError("Mật khẩu không trùng khớp");
+            _txtPassConfirm.requestFocus();
+            return;
+        }
     }
 }

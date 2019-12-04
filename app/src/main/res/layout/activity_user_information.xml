@@ -80,6 +80,7 @@
             android:onClick="clickChangeAvatar"
             android:layout_alignParentRight="true" />
         <TextView
+            android:id="@+id/profileUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trung Kiên"
@@ -107,6 +108,7 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/profileUserID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="48dp"
@@ -136,6 +138,7 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/profileUserPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -165,6 +168,7 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/profileUserAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -191,6 +195,7 @@
 
     <!-- Button -->
     <Button
+        android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:background="#FFFFFF"
         android:layout_height="50dp"
