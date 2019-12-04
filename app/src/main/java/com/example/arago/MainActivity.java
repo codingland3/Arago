@@ -20,6 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.arago.ADMIN.CustomerFragment;
+import com.example.arago.ADMIN.Fragment.PartnerFragment;
 import com.example.arago.USER.AboutUsActivity;
 import com.example.arago.USER.BottomNavigationBehavior;
 import com.example.arago.USER.DarkModePrefManager;
@@ -47,8 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
             switch (item.getItemId()) {
-                case R.id.navigationCustomer:
-                    fragment = new CustomerFragment();
+                case R.id.navigationPartner:
+                    fragment = new PartnerFragment();
                     break;
                 case R.id.navigationHistory:
                     fragment = new FragmentHistory();
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //create a seperate class file, if required in multiple activities
     public void setDarkMode(Window window){
         if(new DarkModePrefManager(this).isNightMode()){
+            Toast.makeText(MainActivity.this, "Tính năng đang phát triển", Toast.LENGTH_SHORT).show();
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             changeStatusBar(MODE_DARK,window);
         }else{

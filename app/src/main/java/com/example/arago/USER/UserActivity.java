@@ -58,6 +58,7 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+                // <Code>
                 if (position == change_password){
                     final AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserActivity.this);
                     // Gắn layout vào view
@@ -76,6 +77,7 @@ public class UserActivity extends AppCompatActivity {
                 } else if (position == service_manager){
                     Toast.makeText(UserActivity.this, "Quản lý dịch vụ", Toast.LENGTH_SHORT).show();
                 }
+                // </Code>
             }
         });
     }
