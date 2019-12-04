@@ -145,7 +145,6 @@ public class CustomerDAO {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
