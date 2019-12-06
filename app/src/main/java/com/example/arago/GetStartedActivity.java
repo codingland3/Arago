@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.arago._USER.MainActivity;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -70,8 +71,6 @@ public class GetStartedActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-
-
     public void changeStatusBar(Window window){
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -97,6 +96,7 @@ public class GetStartedActivity extends AppCompatActivity {
 
             }
         };
+
         profileTracker=new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
@@ -117,14 +117,11 @@ public class GetStartedActivity extends AppCompatActivity {
                 Profile profile = Profile.getCurrentProfile();
                 Toast.makeText(GetStartedActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 nextActivity(profile);
-
             }
-
             @Override
             public void onCancel() {
                 // App code
             }
-
             @Override
             public void onError(FacebookException exception) {
                 // App code

@@ -2,20 +2,18 @@ package com.example.arago.DAO;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.example.arago.ADMIN.Fragment.PartnerFragment;
+import com.example.arago._ADMIN.Fragment.PartnerFragment;
 import com.example.arago.NonUI;
-import com.example.arago.USER.Model.Partner;
+import com.example.arago.Model.Partner;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -43,7 +41,6 @@ public class PartnerDAO {
     }
 
     public List<Partner> getAll() {
-
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -69,19 +66,17 @@ public class PartnerDAO {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        nonUI.toast("Thêm thành công");
-                        Log.d("insert","Thêm thành công");
+                        nonUI.toast("Đăng ký thành công");
+                        Log.d("insert","Đăng ký thành công");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                nonUI.toast("Thêm không thành công");
-                Log.d("insert","Thêm không thành công");
+                nonUI.toast("Đăng ký không thành công");
+                Log.d("insert","Đăng ký không thành công");
             }
         });
     }
-
-
 
 
 

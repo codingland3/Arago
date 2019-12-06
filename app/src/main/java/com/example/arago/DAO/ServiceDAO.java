@@ -7,7 +7,7 @@
 //import android.util.Log;
 //
 //import com.example.arago.DATABASE.DBHelper;
-//import com.example.arago.USER.Model.Service;
+//import com.example.arago.Model.Service;
 //
 //import java.util.ArrayList;
 //import java.util.List;

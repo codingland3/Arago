@@ -1,24 +1,24 @@
 package com.example.arago;
 
 import android.content.Intent;
-import android.location.Address;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.arago.USER.Model.Customer;
+import com.example.arago.DAO.CustomerDAO;
+import com.example.arago.DAO.PartnerDAO;
+import com.example.arago.Model.Customer;
+import com.example.arago.Model.Partner;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -152,32 +152,15 @@ public class RegisterActivity extends AppCompatActivity {
 
 //            progressBar.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            progressBar.setVisibility(View.GONE);
-                            if (task.isSuccessful()) {
-                                Customer customer = new Customer(image, name, email, password, address, phone);
-                                FirebaseDatabase.getInstance().getReference("Customer").child(
-                                        FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(customer)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-//                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);    // không khả thi
-//                                        intent.putExtra("id", name);
-//                                        startActivity(intent);
-                                                } else {
-                                                    Toast.makeText(RegisterActivity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+//                  progressBar.setVisibility(View.GONE);
+                    final Customer customer = new Customer(image, name, email, password, address, phone);
+                    CustomerDAO customerDAO = new CustomerDAO(RegisterActivity.this);
+                    customerDAO.insert(customer);
+                }
+            });
 
-                            } else {
-                                Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
         } else {
             _txtPassConfirm.setError("Mật khẩu không trùng khớp");
             _txtPassConfirm.requestFocus();

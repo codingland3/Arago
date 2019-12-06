@@ -5,9 +5,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.arago.ADMIN.Fragment.CustomerFragment;
+import com.example.arago._ADMIN.Fragment.CustomerFragment;
 import com.example.arago.NonUI;
-import com.example.arago.USER.Model.Customer;
+import com.example.arago.Model.Customer;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +26,7 @@ public class CustomerDAO {
     Context context;
     String key;
     CustomerFragment customerFragment;
+    public static List<Customer> list = new ArrayList<Customer>();
 
     public CustomerDAO(Context context) {
         this.mDatabase = FirebaseDatabase.getInstance().getReference("Customer");
@@ -41,17 +42,15 @@ public class CustomerDAO {
     }
 
     public List<Customer> getAll() {
-        final List<Customer> list = new ArrayList<Customer>();
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get NguoiDung object and use the values to update the UI
+                // Get Customer object and use the values to update the UI
                 list.clear();
                 for (DataSnapshot data:dataSnapshot.getChildren()){
                     Customer item = data.getValue(Customer.class);
                     list.add(item);
                 }
-//                NguoiDungFragment.capnhatLV(); // Bên fragment 2
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -68,14 +67,14 @@ public class CustomerDAO {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        nonUI.toast("Thêm thành công");
-                        Log.d("insert","Thêm thành công");
+                        nonUI.toast("Đăng ký thành công");
+                        Log.d("insert","Đăng ký thành công");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                nonUI.toast("Thêm không thành công");
-                Log.d("insert","Thêm không thành công");
+                nonUI.toast("Đăng ký không thành công");
+                Log.d("insert","Đăng ký không thành công");
             }
         });
     }

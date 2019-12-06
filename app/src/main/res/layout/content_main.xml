@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:id="@+id/content_main"
     style="@style/parent.contentLayout">
 
     <androidx.core.widget.NestedScrollView
@@ -22,7 +23,7 @@
                     android:id="@+id/textViewUser"
                     style="@style/viewParent.headerText"
                     android:maxLines="1"
-                    android:text="Xin chào Kiên"
+                    android:text="Xin chào"
                     android:textColor="@color/textIndexColor"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
@@ -152,7 +153,7 @@
                 <TextView
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
-                    android:text="Yêu thích"
+                    android:text="Nổi bật"
                     style="@style/viewParent.headerText"/>
 
                 <TextView
@@ -171,14 +172,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/custom_list_item"
-                android:paddingBottom="20dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
-                <include layout="@layout/lv_item_services"/>
-                <include layout="@layout/lv_item_services"/>
-                <include layout="@layout/lv_item_services"/>
+                <include layout="@layout/lv_item_services_one"/>
+                <include layout="@layout/lv_item_services_two"/>
+                <include layout="@layout/lv_item_services_three"/>
 
             </LinearLayout>
 

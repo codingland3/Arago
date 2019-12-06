@@ -18,18 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.arago.DAO.CustomerDAO;
 import com.example.arago.DAO.PartnerDAO;
-import com.example.arago.USER.Model.Customer;
-import com.example.arago.USER.Model.Partner;
+import com.example.arago.Model.Customer;
+import com.example.arago.Model.Partner;
+import com.example.arago._USER.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     String dbuser_username, dbuser_password, dbpartner_username, dbpartner_password, admin_username, admin_password;
     String user, pass;
     private BottomNavigationView bottomNavigationView;
-    private List<String> list = new ArrayList<>();
     List<Customer> customers = new ArrayList<>();
     List<Partner> partners = new ArrayList<>();
 
@@ -81,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void clickLogin(View view) {
-        clickLogin();
+        clickLoginWithFirebase();
     }
 
     public void clickBackToGetStarted(View view) {
@@ -107,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(LoginActivity.this, "Đăng nhập bằng tài khoản Google", Toast.LENGTH_SHORT).show();
     }
 
-    public void clickLogin(){
+    public void clickLoginWithFirebase(){
         // user và pass là 2 biến để get và chứa dữ liệu của editText trong form đăng nhập.
         user = username.getText().toString();
         pass = password.getText().toString();
@@ -135,8 +130,9 @@ public class LoginActivity extends AppCompatActivity {
             password.requestFocus();
             return;
         } else {
+            // Tài khoản admin gán cứng
             if (user.equals("arago@gmail.com") && pass.equals("123456")) {
-                Intent intent = new Intent(LoginActivity.this, com.example.arago.ADMIN.MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, com.example.arago._ADMIN.MainActivity.class);
                 startActivity(intent);
                 Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách admin", Toast.LENGTH_SHORT).show();
                 return;
@@ -155,19 +151,21 @@ public class LoginActivity extends AppCompatActivity {
                                     CustomerDAO customerDAO = new CustomerDAO(LoginActivity.this);
                                     customers = customerDAO.getAll();
 
-                                    // Vòng lặp so sánh text từ edittext và danh sách partners
-                                    for (int j = 0; j <= partners.size() - 1; j++) {
-                                        if (partners.size() > 0) {
+                                    if (partners.size() > 0) {
+                                        // Vòng lặp so sánh text từ edittext và danh sách partners
+                                        for (int j = 0; j <= partners.size() - 1; j++) {
                                             if (user.equals(partners.get(j).getPartner_email())) {
-                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                Intent intent = new Intent(LoginActivity.this, com.example.arago._PARTNER.MainActivity.class);
                                                 startActivity(intent);
                                                 Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách cộng tác viên", Toast.LENGTH_SHORT).show();
                                                 return;
                                             }
                                         }
                                     }
-                                    for (int a = 0; a <= customers.size() - 1; a++) {
-                                        if (customers.size() > 0) {
+
+                                    if (customers.size() > 0) {
+                                        // Vòng lặp so sánh text từ edittext và danh sách customers
+                                        for (int a = 0; a <= customers.size() - 1; a++) {
                                             if (user.equals(customers.get(a).getCustomer_email())) {
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                 startActivity(intent);
@@ -177,48 +175,12 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     }
 
-                                    // Điều k
-//                                            if (user.equals("arago@gmail.com") && pass.equals("123456")) {
-//                                                Intent intent = new Intent(LoginActivity.this, com.example.arago.ADMIN.MainActivity.class);
-//                                                startActivity(intent);
-//                                                Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách admin", Toast.LENGTH_SHORT).show();
-//                                            }else if(){
-//                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                                                startActivity(intent);
-//                                                Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách cộng tác viên", Toast.LENGTH_SHORT).show();
-//                                            }else if(user.equals(dbuser_username) && pass.equals(dbuser_password)){
-//                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                                                startActivity(intent);
-//                                                Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách người dùng", Toast.LENGTH_SHORT).show();
-//                                            } else {
-//                                                Toast.makeText(LoginActivity.this, "Sai tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
-//                                            }
-
-                                    // Lấy tài khoản của người dùng gán vào dbuser
-                                    login();
                                 } else {
                                     Toast.makeText(LoginActivity.this,"Sai tài khoản hoặc mật khẩu",Toast.LENGTH_SHORT).show();
-
-                                    dbpartner_username = user;
-                                    // Lấy tài khoản partner gán vào dbuser
-//                                dbpartner_username = "congtacvien@gmail.com";   // sao k xóa này? cái này tui gán cứng đó
-//                                dbpartner_password = "123456";
-
-                                    // Tài khoản admin gán cứng:
-                                    admin_username = "arago@gmail.com";
-                                    admin_password = "123456";
-                                    login();
                                 }
                             }
                         });
             }
-            }
-
-
+        }
     }
-
-    public void login(){
-
-    }
-
 }

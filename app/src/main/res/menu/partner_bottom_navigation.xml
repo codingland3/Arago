@@ -7,18 +7,13 @@
         android:title="Menu" />
 
     <item
-        android:id="@+id/navigationStatistic"
-        android:icon="@drawable/ic_statistic"
-        android:title="Statistic" />
+        android:id="@+id/navigationRequest"
+        android:icon="@drawable/ic_request"
+        android:title="Request" />
 
     <item
         android:id="@+id/navigationHistory"
         android:icon="@drawable/ic_history"
         android:title="History" />
-
-    <item
-        android:id="@+id/navigationPartner"
-        android:icon="@drawable/ic_customer"
-        android:title="Partner" />
 
 </menu>
