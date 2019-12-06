@@ -18,6 +18,7 @@ public class Request {
         this.request_brand = request_brand;
         this.request_datetime = request_datetime;
     }
+    //
 
     public int getRequest_id() {
         return request_id;
