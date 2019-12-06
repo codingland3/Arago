@@ -32,7 +32,7 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvName, tvPhone, tvEmail, tvAddress;
+        public TextView tvName, tvPhone, tvEmail, tvAddress, tvCMND;
         public ImageView imgXoa;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -41,6 +41,7 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.ViewHold
             tvPhone = itemView.findViewById(R.id.tv_cell_phone);
             tvEmail = itemView.findViewById(R.id.tv_cell_email);
             tvAddress = itemView.findViewById(R.id.tv_cell_address);
+            tvCMND = itemView.findViewById(R.id.tv_cell_cmnd);
         }
     }
 
@@ -65,6 +66,7 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.ViewHold
         holder.tvPhone.setText(partner.getPartner_phone());
         holder.tvEmail.setText(partner.getPartner_email());
         holder.tvAddress.setText(partner.getPartner_address());
+        holder.tvCMND.setText(partner.getPartner_cmnd());
 
         holder.imgXoa.setOnClickListener(new View.OnClickListener() {
             @Override

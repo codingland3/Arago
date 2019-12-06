@@ -5,7 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.arago.ADMIN.CustomerFragment;
+import com.example.arago.ADMIN.Fragment.CustomerFragment;
 import com.example.arago.NonUI;
 import com.example.arago.USER.Model.Customer;
 import com.google.android.gms.tasks.OnFailureListener;

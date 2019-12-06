@@ -1,242 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_backspace"
-            android:onClick="clickBack"/>
+        android:layout_height="match_parent">
         <TextView
+            android:id="@+id/toolbar"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Arago"
+            android:text="TẠO TÀI KHOẢN"
+            android:layout_marginRight="20dp"
             android:textColor="@color/textIndexColor"
             android:textSize="26sp"
-            android:layout_marginRight="50dp"
             android:gravity="center_horizontal"/>
-    </androidx.appcompat.widget.Toolbar>
-
-
-
-    <LinearLayout
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/blue_border_rounded_cornwe">
-
-            <!-- INPUT -->
-            <EditText
-                android:id="@+id/register_name"
-                android:hint="Họ và tên"
-                android:textSize="15sp"
-                android:paddingLeft="10dp"
-                android:paddingTop="15dp"
-                android:maxLines="1"
-                android:inputType="textPersonName"
-                android:paddingBottom="15dp"
-                android:maxLength="30"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/blue_border_rounded_cornwe">
-
-            <!-- INPUT -->
-            <EditText
-                android:id="@+id/register_email"
-                android:hint="Email"
-                android:textSize="15sp"
-                android:paddingLeft="10dp"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:maxLines="1"
-                android:inputType="textEmailAddress"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/blue_border_rounded_cornwe">
-
-            <!-- INPUT -->
-            <EditText
-                android:id="@+id/register_pass"
-                android:hint="Mật khẩu"
-                android:textSize="15sp"
-                android:paddingLeft="10dp"
-                android:paddingTop="15dp"
-                android:maxLines="1"
-                android:inputType="textPassword"
-                android:paddingBottom="15dp"
-                android:maxLength="10"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/blue_border_rounded_cornwe">
-
-            <!-- INPUT -->
-            <EditText
-                android:id="@+id/register_confirm_pass"
-                android:hint="Nhập lại mật khẩu"
-                android:textSize="15sp"
-                android:paddingLeft="10dp"
-                android:paddingTop="15dp"
-                android:maxLines="1"
-                android:inputType="textPassword"
-                android:paddingBottom="15dp"
-                android:maxLength="10"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/blue_border_rounded_cornwe">
-
-            <!-- INPUT -->
-            <EditText
-                android:id="@+id/register_address"
-                android:hint="Địa chỉ hiện tại"
-                android:textSize="15sp"
-                android:paddingLeft="10dp"
-                android:paddingTop="15dp"
-                android:maxLines="1"
-                android:inputType="text"
-                android:paddingBottom="15dp"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/blue_border_rounded_cornwe">
-
-            <!-- INPUT -->
-            <EditText
-                android:id="@+id/register_phone"
-                android:hint="Số điện thoại liên lạc"
-                android:textSize="15sp"
-                android:paddingLeft="10dp"
-                android:paddingTop="15dp"
-                android:maxLines="1"
-                android:inputType="phone"
-                android:paddingBottom="15dp"
-                android:maxLength="10"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </RelativeLayout>
-
-        // Button
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="#FFFFFF"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:paddingTop="14dp"
-            android:paddingBottom="14dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10.7dp"
-            android:text="Tạo tài khoản"
-            android:onClick="clickCreateAccount"
-            android:background="@drawable/blue_fill_rounded_color" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-            // Forgot
-            <TextView
-                android:id="@+id/fogot_password"
+            android:paddingBottom="30dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/dontHaveAccountTextColor"
-                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="20dp"
-                android:text="Bạn đã có tài khoản?" />
+                android:background="@drawable/blue_border_rounded_cornwe">
 
-            // Signup
+                <!-- INPUT -->
+                <EditText
+                    android:id="@+id/register_id"
+                    android:hint="ID cộng tác viên"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:maxLines="1"
+                    android:paddingBottom="10dp"
+                    android:maxLength="30"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
+
+                <!-- INPUT -->
+                <EditText
+                    android:id="@+id/register_name"
+                    android:hint="Họ và tên"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
+                    android:paddingBottom="10dp"
+                    android:maxLength="30"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/forgotPasswordTextColor"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                android:onClick="clickBackToLogin"
-                android:text="Đăng nhập" />
+                android:layout_marginTop="11dp"
+                android:textSize="15dp"
+                android:text="Giới tính:"
+                android:layout_marginLeft="20dp"/>
 
+            <RadioGroup
+                android:id="@+id/radioGroupSex"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <!-- INPUT -->
+                <RadioButton
+                    android:id="@+id/radio_btn_male"
+                    android:text="Nam"
+                    android:layout_marginLeft="15dp"
+                    android:checked="true"
+                    android:textColor="@color/accentTextColor"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <!-- INPUT -->
+                <RadioButton
+                    android:id="@+id/radio_btn_female"
+                    android:text="Nữ"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/accentTextColor"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RadioGroup>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
+
+                <!-- INPUT -->
+                <EditText
+                    android:id="@+id/register_birthday"
+                    android:hint="Ngày sinh"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
+                    android:paddingBottom="10dp"
+                    android:maxLength="30"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
+
+                <!-- INPUT -->
+                <EditText
+                    android:id="@+id/register_email"
+                    android:hint="Email"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:maxLines="1"
+                    android:inputType="textEmailAddress"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
+
+                <!-- INPUT -->
+                <EditText
+                    android:id="@+id/register_pass"
+                    android:hint="Mật khẩu"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:maxLines="1"
+                    android:inputType="textPassword"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:maxLength="10"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
+
+                <!-- INPUT -->
+                <EditText
+                    android:id="@+id/register_confirm_pass"
+                    android:hint="Nhập lại mật khẩu"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:maxLines="1"
+                    android:inputType="textPassword"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:maxLength="10"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
+
+                <!-- INPUT -->
+                <EditText
+                    android:id="@+id/register_address"
+                    android:hint="Địa chỉ hiện tại"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
+
+                <!-- INPUT -->
+                <EditText
+                    android:id="@+id/register_phone"
+                    android:hint="Số điện thoại liên lạc"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:maxLines="1"
+                    android:inputType="phone"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:maxLength="10"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
+
+                <!-- INPUT -->
+                <EditText
+                    android:id="@+id/register_cmnd"
+                    android:hint="Số chứng minh thư nhân dân"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:maxLines="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:maxLength="12"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            // Button
+            <TextView
+                android:id="@+id/tvClickCreatePartnerAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10.7dp"
+                android:text="Tạo tài khoản"
+                android:onClick="clickCreatePartnerAccount"
+                android:background="@drawable/blue_fill_rounded_color" />
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>

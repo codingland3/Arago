@@ -1,4 +1,4 @@
-package com.example.arago.ADMIN;
+package com.example.arago.ADMIN.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

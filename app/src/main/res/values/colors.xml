@@ -11,6 +11,7 @@
     <color name="statusBarColor">#000</color>
     <color name="whiteBodyColor">#FCFCFC</color>
     <color name="darkTextColor">#020000</color>
+    <color name="accentTextColor">#6D6D6D</color>
     <color name="primaryTextColor">#039BE5</color>
     <color name="whiteTextColor">#fff</color>
     <color name="frutorial_title">#4c4c4c</color>

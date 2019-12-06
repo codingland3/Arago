@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arago.ADMIN.CustomerFragment;
+import com.example.arago.ADMIN.Fragment.CustomerFragment;
 import com.example.arago.DAO.CustomerDAO;
 import com.example.arago.R;
 import com.example.arago.USER.Model.Customer;
@@ -36,7 +36,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         public ImageView imgXoa;
         public ViewHolder(View itemView) {
             super(itemView);
-            imgXoa = itemView.findViewById(R.id.iv_delete_cell_customer);
+            imgXoa = itemView.findViewById(R.id.iv_delete_cell_partner);
             tvName = itemView.findViewById(R.id.tv_cell_name);
             tvPhone = itemView.findViewById(R.id.tv_cell_phone);
             tvEmail = itemView.findViewById(R.id.tv_cell_email);

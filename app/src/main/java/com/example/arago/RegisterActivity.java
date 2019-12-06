@@ -86,6 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String address = _txtAddress.getText().toString().trim();
         final String phone = _txtPhone.getText().toString().trim();
 //        final int image = Integer.parseInt(_ivAvatar.getResources().toString().trim());
+
         final int image = R.drawable.emthree;
 
         if (name.isEmpty()) {

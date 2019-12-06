@@ -2,6 +2,7 @@ package com.example.arago.DAO;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -14,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ public class PartnerDAO {
     Context context;
     String key;
     PartnerFragment partnerFragment;
-
+    public static List<Partner> list = new ArrayList<Partner>();
     public PartnerDAO(Context context) {
         this.mDatabase = FirebaseDatabase.getInstance().getReference("Partner");
         this.context = context;
@@ -41,17 +43,16 @@ public class PartnerDAO {
     }
 
     public List<Partner> getAll() {
-        final List<Partner> list = new ArrayList<Partner>();
+
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get NguoiDung object and use the values to update the UI
+                // Get Partner object and use the values to update the UI
                 list.clear();
                 for (DataSnapshot data:dataSnapshot.getChildren()){
                     Partner item = data.getValue(Partner.class);
                     list.add(item);
                 }
-//                NguoiDungFragment.capnhatLV(); // Bên fragment 2
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -79,6 +80,10 @@ public class PartnerDAO {
             }
         });
     }
+
+
+
+
 
     public void update(final Partner item) {
         mDatabase.addValueEventListener(new ValueEventListener() {

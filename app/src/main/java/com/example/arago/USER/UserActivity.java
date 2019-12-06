@@ -3,7 +3,6 @@ package com.example.arago.USER;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.arago.GetStartedActivity;
-import com.example.arago.MainActivity;
 import com.example.arago.R;
 import com.example.arago.USER.Adapter.User_GridAdapter;
 import com.facebook.login.LoginManager;

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Request {
 
     private int request_id, request_service_id;
-    private String request_errortype, request_brand;
+    private String request_servicename, request_errortype, request_brand;
     private Date request_datetime;
 
     public Request() {

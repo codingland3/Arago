@@ -1,13 +1,15 @@
 package com.example.arago.ADMIN.Fragment;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,8 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.arago.ADMIN.Adapter.PartnerAdapter;
 import com.example.arago.DAO.PartnerDAO;
 import com.example.arago.R;
-import com.example.arago.RegisterActivity;
-import com.example.arago.USER.Model.Customer;
 import com.example.arago.USER.Model.Partner;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,15 +43,19 @@ public class PartnerFragment extends Fragment {
     PartnerDAO partnerDAO;
     DatabaseReference mDatabase;
     LinearLayoutManager mLayoutManager;
-    FloatingActionButton floatingActionButton;
-    private EditText _txtFullName, _txtEmail, _txtPass, _txtPassConfirm, _txtAddress, _txtPhone, _txtCMND;
+
+    private EditText _txtID, _txtFullName, _txtBirthDay, _txtEmail, _txtPass, _txtPassConfirm, _txtPhone, _txtAddress, _txtCMND;
+    private RadioButton _radioMale, _radioFemale;
+    private RadioGroup _radioGroupSex;
+    private String sex;
     private FirebaseAuth mAuth;
-
-
+    private FloatingActionButton floatingActionButton;
+    private TextView tvClickCreatePartnerAccount;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Nullable
@@ -60,7 +64,9 @@ public class PartnerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.layout_partner, container, false);
 
-        rv_partner = view.findViewById(R.id.rv_partner);
+        rv_partner = (RecyclerView) view.findViewById(R.id.rv_partner);
+        floatingActionButton = view.findViewById(R.id.fab_create_partner_account);
+
         partnerDAO = new PartnerDAO(getActivity());
         partnerList = new ArrayList<Partner>();
 
@@ -79,7 +85,10 @@ public class PartnerFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
             }
         };
+
         mDatabase.addValueEventListener(listener);
+
+        clickAddPartner();
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         rv_partner.setLayoutManager(mLayoutManager);
@@ -99,7 +108,10 @@ public class PartnerFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    public void clickAddPartner(){
+
+
+
+    public void clickAddPartner (){
         floatingActionButton.show();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,37 +122,40 @@ public class PartnerFragment extends Fragment {
                 v = inflater.inflate(R.layout.activity_register_partner, null);
                 alertDialog.setView(v);
 
-                init();
+                _txtID = (EditText) v.findViewById(R.id.register_id);
+                _txtFullName = (EditText) v.findViewById(R.id.register_name);
+                _txtBirthDay = (EditText) v.findViewById(R.id.register_birthday);
+                _radioGroupSex = (RadioGroup) v.findViewById(R.id.radioGroupSex);
+                _radioMale = (RadioButton) v.findViewById(R.id.radio_btn_male);
+                _radioFemale = (RadioButton) v.findViewById(R.id.radio_btn_female);
+                _txtEmail = (EditText) v.findViewById(R.id.register_email);
+                _txtPass = (EditText) v.findViewById(R.id.register_pass);
+                _txtPassConfirm = (EditText) v.findViewById(R.id.register_confirm_pass);
+                _txtPhone = (EditText) v.findViewById(R.id.register_phone);
+                _txtAddress = (EditText) v.findViewById(R.id.register_address);
+                _txtCMND = (EditText) v.findViewById(R.id.register_cmnd);
 
-                // Gắn thêm nút và hiển thị dialog
-                alertDialog.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
+                tvClickCreatePartnerAccount = v.findViewById(R.id.tvClickCreatePartnerAccount);
+                tvClickCreatePartnerAccount.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            registerPartner();
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            return;
-                        } catch (NullPointerException npe) {
-                            Toast.makeText(getContext(), "Lỗi NullPointerException", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-                alertDialog.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                    public void onClick(View view) {
+                        registerPartner();
                     }
                 });
                 alertDialog.show();
             }
         });
-
     }
 
-
     private void registerPartner() {
+        final String id = _txtID.getText().toString().trim();
         final String name = _txtFullName.getText().toString().trim();
+        if (_radioMale.isChecked()){
+            sex = "Nam";
+        } else if (_radioFemale.isChecked()){
+            sex = "Nữ";
+        }
+        final String birthday = _txtBirthDay.getText().toString().trim();
         final String email = _txtEmail.getText().toString().trim();
         final String password = _txtPass.getText().toString().trim();
         final String confirm_password = _txtPassConfirm.getText().toString().trim();
@@ -150,26 +165,39 @@ public class PartnerFragment extends Fragment {
 //        final int image = Integer.parseInt(_ivAvatar.getResources().toString().trim());
         final int image = R.drawable.emthree;
 
+
+        if (id.isEmpty()) {
+            _txtID.setError("Không được bỏ trống trường này");
+            _txtID.requestFocus();
+            return;
+        }
+
         if (name.isEmpty()) {
-            _txtFullName.setError("Không được bỏ trống họ tên");
+            _txtFullName.setError("Không được bỏ trống trường này");
             _txtFullName.requestFocus();
             return;
         }
 
+        if (birthday.isEmpty()) {
+            _txtBirthDay.setError("Không được bỏ trống trường này");
+            _txtBirthDay.requestFocus();
+            return;
+        }
+
         if (email.isEmpty()) {
-            _txtEmail.setError("Không được bỏ trống Email");
+            _txtEmail.setError("Không được bỏ trống trường này");
             _txtEmail.requestFocus();
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _txtEmail.setError("Địa chỉ Email không chính xác");
+            _txtEmail.setError("Nhập sai trường này");
             _txtEmail.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
-            _txtPass.setError("Không được bỏ trống mật khẩu");
+            _txtPass.setError("Không được bỏ trống trường này");
             _txtPass.requestFocus();
             return;
         }
@@ -188,55 +216,51 @@ public class PartnerFragment extends Fragment {
 
         if (password.equals(confirm_password)) {
             if (address.isEmpty()) {
-                _txtAddress.setError("Không được bỏ trống địa chỉ");
+                _txtAddress.setError("Không được bỏ trống trường này");
                 _txtAddress.requestFocus();
                 return;
             }
 
             if (address.length() <= 10) {
-                _txtAddress.setError("Địa chỉ không chính xác");
+                _txtAddress.setError("Nhập sai trường này");
                 _txtAddress.requestFocus();
                 return;
             }
 
             if (phone.isEmpty()) {
-                _txtPhone.setError("Không được bỏ trống số điện thoại");
+                _txtPhone.setError("Không được bỏ trống trường này");
                 _txtPhone.requestFocus();
                 return;
             }
 
             if (phone.length() != 10) {
-                _txtPhone.setError("Số điện thoại không chính xác");
+                _txtPhone.setError("Nhập sai trường này");
                 _txtPhone.requestFocus();
                 return;
             }
 
+            if (cmnd.isEmpty()) {
+                _txtCMND.setError("Không được bỏ trống trường này");
+                _txtCMND.requestFocus();
+                return;
+            }
+
+            if (cmnd.length() < 9) {
+                _txtCMND.setError("Nhập sai trường này");
+                _txtCMND.requestFocus();
+                return;
+            }
+
+            // Tạo tài khoản
 //            progressBar.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-//                            progressBar.setVisibility(View.GONE);
-                    if (task.isSuccessful()) {
-                        Customer customer = new Customer(image, name, email, password, address, phone);
-                        FirebaseDatabase.getInstance().getReference("Partner").child(
-                                FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(customer)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(getContext(), "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-//                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);    // không khả thi
-//                                        intent.putExtra("id", name);
-//                                        startActivity(intent);
-                                        } else {
-                                            Toast.makeText(getContext(), "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-
-                    } else {
-                        Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+//                  progressBar.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    PartnerDAO partnerDAO = new PartnerDAO(getContext());
+                    final Partner partner = new Partner(image, id, name, email, password, address, phone, cmnd, sex, birthday);
+                    partnerDAO.insert(partner);
                 }
             });
         } else {
@@ -245,16 +269,4 @@ public class PartnerFragment extends Fragment {
             return;
         }
     }
-
-    public void init(){
-        _txtFullName = (EditText) getActivity().findViewById(R.id.register_name);
-        _txtEmail = (EditText) getActivity().findViewById(R.id.register_email);
-        _txtPass = (EditText) getActivity().findViewById(R.id.register_pass);
-        _txtPassConfirm = (EditText) getActivity().findViewById(R.id.register_confirm_pass);
-        _txtPhone = (EditText) getActivity().findViewById(R.id.register_phone);
-        _txtAddress = (EditText) getActivity().findViewById(R.id.register_address);
-        _txtCMND = (EditText) getActivity().findViewById(R.id.register_cmnd);
-    }
-
-
 }

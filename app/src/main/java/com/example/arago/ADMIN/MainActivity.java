@@ -1,4 +1,4 @@
-package com.example.arago;
+package com.example.arago.ADMIN;
 
 import android.content.Intent;
 import android.os.Build;
@@ -19,6 +19,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.arago.ADMIN.Fragment.PartnerFragment;
+import com.example.arago.R;
 import com.example.arago.USER.AboutUsActivity;
 import com.example.arago.USER.BottomNavigationBehavior;
 import com.example.arago.USER.DarkModePrefManager;
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
             switch (item.getItemId()) {
+                case R.id.navigationPartner:
+                    fragment = new PartnerFragment();
+                    break;
                 case R.id.navigationHistory:
                     fragment = new FragmentHistory();
                     break;
@@ -67,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setDarkMode(getWindow());
-        setContentView(R.layout.customer_activity_main);
+        setContentView(R.layout.admin_activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -82,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         // BottomNav
-        bottomNavigationView = findViewById(R.id.customer_navigation);
+        bottomNavigationView = findViewById(R.id.admin_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomNavigationView.getLayoutParams();
