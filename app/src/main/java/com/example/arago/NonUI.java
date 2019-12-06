@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 public class NonUI {
     Context context;
+    //test nè
 
 
     public NonUI(Context context) {
