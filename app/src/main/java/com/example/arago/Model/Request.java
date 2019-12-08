@@ -8,8 +8,7 @@ public class Request {
     public Request() {
     }
 
-    public Request(int request_id, int request_description_img, String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name) {
-        this.request_id = request_id;
+    public Request( int request_description_img, String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name) {
         this.request_description_img = request_description_img;
         this.request_customer_name = request_customer_name;
         this.request_customer_phone = request_customer_phone;
@@ -21,10 +20,6 @@ public class Request {
 
     public int getRequest_id() {
         return request_id;
-    }
-
-    public void setRequest_id(int request_id) {
-        this.request_id = request_id;
     }
 
     public int getRequest_description_img() {

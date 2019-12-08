@@ -67,14 +67,14 @@ public class RequestDAO {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        nonUI.toast("Thêm thành công");
-                        Log.d("insert","Thêm thành công");
+                        nonUI.toast("Đăng ký thành công");
+                        Log.d("insert","Đăng ký thành công");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                nonUI.toast("Thêm không thành công");
-                Log.d("insert","Thêm không thành công");
+                nonUI.toast("Đăng ký không thành công");
+                Log.d("insert","Đăng ký không thành công");
             }
         });
     }
