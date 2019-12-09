@@ -2,25 +2,20 @@ package com.example.arago._USER;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.arago.DAO.PartnerDAO;
 import com.example.arago.DAO.RequestDAO;
-import com.example.arago.Model.Partner;
 import com.example.arago.Model.Request;
 import com.example.arago.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class FormRequestGiupViecActivity extends AppCompatActivity {
 
     EditText edName, edSdt, edAddress, edTime, edMota;
     TextView btnAccept;
     RequestDAO requestDAO;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +26,6 @@ public class FormRequestGiupViecActivity extends AppCompatActivity {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 final int image = R.drawable.email;
                 final String NameService = "Giúp Việc";
                 final String Name = edName.getText().toString().trim();
@@ -49,7 +43,6 @@ public class FormRequestGiupViecActivity extends AppCompatActivity {
 
     public void clickBack(View view) {
         finish();
-
     }
 
     public void anhxa(){

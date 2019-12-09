@@ -10,14 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.arago.DAO.RequestDAO;
 import com.example.arago.Model.Request;
 import com.example.arago.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class FormRequestSuaDienActivity extends AppCompatActivity {
 
     EditText edName, edSdt, edAddress, edTime, edMota;
     TextView btnAccept;
     RequestDAO requestDAO;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -23,7 +23,6 @@ import com.example.arago.Model.Partner;
 import com.example.arago._USER.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -54,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         // Nạp thông tin lên form từ sharePreference
         final Boolean luuthongtin = luutru.getBoolean("save_information", false);
         if (luuthongtin) {
+            username.setText(luutru.getString("username", ""));  // key = username, còn mặc định nếu chưa từng được lưu thì nạp khoảng trắng
             password.setText(luutru.getString("password", ""));
             cb_remember.setChecked(true);
         }
@@ -100,9 +100,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void clickLoginWithFirebase(){
+
         // user và pass là 2 biến để get và chứa dữ liệu của editText trong form đăng nhập.
         user = username.getText().toString();
         pass = password.getText().toString();
+
+        // Điều kiện để lưu thông tin xuống:
+        SharedPreferences.Editor editor = luutru.edit();
+        if(cb_remember.isChecked()){
+            editor.putString("username", String.valueOf(user));
+            editor.putString("password", String.valueOf(pass));
+        }
+        editor.putBoolean("save_information", cb_remember.isChecked());
+        editor.commit();
 
         if (user.isEmpty()) {
             username.setError("Mời nhập tài khoản");
