@@ -23,12 +23,14 @@
         <activity android:name="._USER.HelpActivity" />
         <activity android:name="._USER.AboutUsActivity" />
         <activity android:name="._USER.UserActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+
         <activity android:name="._USER.MainActivity" />
         <activity android:name="._PARTNER.MainActivity" />
         <activity android:name="._ADMIN.MainActivity" />
+
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".GetStartedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

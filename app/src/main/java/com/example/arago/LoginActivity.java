@@ -36,12 +36,9 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox cb_remember;
     private FirebaseAuth auth;
     SharedPreferences luutru;
-    String dbuser_username, dbuser_password, dbpartner_username, dbpartner_password, admin_username, admin_password;
     String user, pass;
-    private BottomNavigationView bottomNavigationView;
     List<Customer> customers = new ArrayList<>();
     List<Partner> partners = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,9 +148,9 @@ public class LoginActivity extends AppCompatActivity {
                                     CustomerDAO customerDAO = new CustomerDAO(LoginActivity.this);
                                     customers = customerDAO.getAll();
 
-                                    if (partners.size() > 0) {
-                                        // Vòng lặp so sánh text từ edittext và danh sách partners
-                                        for (int j = 0; j <= partners.size() - 1; j++) {
+                                    // Vòng lặp so sánh text từ edittext và danh sách partners
+                                    for (int j = 0; j <= partners.size() - 1; j++) {
+                                        if (partners.size() > 0) {
                                             if (user.equals(partners.get(j).getPartner_email())) {
                                                 Intent intent = new Intent(LoginActivity.this, com.example.arago._PARTNER.MainActivity.class);
                                                 startActivity(intent);
@@ -163,9 +160,9 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     }
 
-                                    if (customers.size() > 0) {
-                                        // Vòng lặp so sánh text từ edittext và danh sách customers
-                                        for (int a = 0; a <= customers.size() - 1; a++) {
+                                    // Vòng lặp so sánh text từ edittext và danh sách customers
+                                    for (int a = 0; a <= customers.size() - 1; a++) {
+                                        if (customers.size() > 0) {
                                             if (user.equals(customers.get(a).getCustomer_email())) {
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                 startActivity(intent);
