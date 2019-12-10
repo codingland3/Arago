@@ -11,23 +11,27 @@
         android:roundIcon="@drawable/logo_arago"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="._USER.FormRequestTrangDiemActivity"></activity>
+        <activity android:name="._USER.JobList">
+
+        </activity>
+        <activity android:name="._USER.JobDetails" />
+        <activity android:name=".CartActivity" />
+        <activity android:name="._USER.OrderActivity" />
+
+        <activity android:name="._USER.FormRequestTrangDiemActivity" />
         <activity android:name="._USER.FormRequestGiupViecActivity" />
         <activity android:name="._USER.FormRequestXayDungActivity" />
         <activity android:name="._USER.FormRequestITActivity" />
         <activity android:name="._USER.FormRequestSuaDienActivity" />
         <activity android:name="._USER.FormRequestSuaNuocActivity" />
-
         <activity android:name="._USER.ServicesActivity" />
         <activity android:name="._USER.PolicyActivity" />
         <activity android:name="._USER.HelpActivity" />
         <activity android:name="._USER.AboutUsActivity" />
         <activity android:name="._USER.UserActivity" />
-
         <activity android:name="._USER.MainActivity" />
         <activity android:name="._PARTNER.MainActivity" />
         <activity android:name="._ADMIN.MainActivity" />
-
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />

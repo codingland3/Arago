@@ -79,6 +79,8 @@ public class RequestDAO {
         });
     }
 
+
+
     public void delete(final Request item) {
 
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -114,4 +116,9 @@ public class RequestDAO {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-    }}
+    }
+
+
+    // Hàm của Trung:
+
+}

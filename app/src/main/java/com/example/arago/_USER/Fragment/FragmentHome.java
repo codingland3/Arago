@@ -19,12 +19,7 @@ import com.example.arago.R;
 import com.example.arago._USER.Adapter.Main_CardViewAdapter;
 import com.example.arago._USER.Adapter.Main_GridAdapter;
 import com.example.arago.Model.Event;
-import com.example.arago._USER.FormRequestGiupViecActivity;
-import com.example.arago._USER.FormRequestITActivity;
-import com.example.arago._USER.FormRequestSuaDienActivity;
-import com.example.arago._USER.FormRequestSuaNuocActivity;
-import com.example.arago._USER.FormRequestTrangDiemActivity;
-import com.example.arago._USER.FormRequestXayDungActivity;
+import com.example.arago._USER.JobList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +30,7 @@ public class FragmentHome extends Fragment {
 
     GridView gridServices;
     Main_GridAdapter main_gridAdapter;
-    Integer suanuoc = 0, trangdiem = 1, suadien = 2, xaydung = 3, it = 4, giupviec = 5;
+    Integer suanuoc = 0, dienlanh = 1, suadien = 2, xaydung = 3, it = 4, giupviec = 5;
 
     ViewPager viewPager;
     Main_CardViewAdapter cardViewAdapter;
@@ -43,11 +38,12 @@ public class FragmentHome extends Fragment {
     TextView tvHello;
     CircleImageView circleImageView;
 
+    public static final String ID = "id";
 
 
     String[] values = {
             "Thợ sửa nước",
-            "Thợ trang điểm",
+            "Thợ điện lạnh",
             "Thợ sửa điện",
             "Thợ xây dựng",
             "Thợ IT",
@@ -63,14 +59,12 @@ public class FragmentHome extends Fragment {
             R.drawable.nguoi_giup_viec
     };
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_main, container, false);
         init();
 
-//
 //
 //        MainActivity activity = (MainActivity) getActivity();
 //
@@ -93,29 +87,34 @@ public class FragmentHome extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // <Code>
-                //
                 if (position == suanuoc){
-                    Intent intent = new Intent(getContext(), FormRequestSuaNuocActivity.class);
+                    Intent intent = new Intent(getContext(), JobList.class);
+                    intent.putExtra(ID, "01");
                     startActivity(intent);
                     Toast.makeText(getContext(), "Sửa nước", Toast.LENGTH_SHORT).show();
-                } else if (position == trangdiem) {
-                    Intent intent = new Intent(getContext(), FormRequestTrangDiemActivity.class);
+                } else if (position == dienlanh) {
+                    Intent intent = new Intent(getContext(), JobList.class);
+                    intent.putExtra(ID, "02");
                     startActivity(intent);
-                    Toast.makeText(getContext(), "Trang điểm", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Điện lạnh", Toast.LENGTH_SHORT).show();
                 } else if (position == suadien){
-                    Intent intent = new Intent(getContext(), FormRequestSuaDienActivity.class);
+                    Intent intent = new Intent(getContext(), JobList.class);
+                    intent.putExtra(ID, "03");
                     startActivity(intent);
                     Toast.makeText(getContext(), "Sửa điện", Toast.LENGTH_SHORT).show();
                 } else if (position == xaydung){
-                    Intent intent = new Intent(getContext(), FormRequestXayDungActivity.class);
+                    Intent intent = new Intent(getContext(), JobList.class);
+                    intent.putExtra(ID, "04");
                     startActivity(intent);
                     Toast.makeText(getContext(), "Xây dựng", Toast.LENGTH_SHORT).show();
                 } else if (position == it){
-                    Intent intent = new Intent(getContext(), FormRequestITActivity.class);
+                    Intent intent = new Intent(getContext(), JobList.class);
+                    intent.putExtra(ID, "05");
                     startActivity(intent);
                     Toast.makeText(getContext(), "IT", Toast.LENGTH_SHORT).show();
                 } else if (position == giupviec){
-                    Intent intent = new Intent(getContext(), FormRequestGiupViecActivity.class);
+                    Intent intent = new Intent(getContext(), JobList.class);
+                    intent.putExtra(ID, "06");
                     startActivity(intent);
                     Toast.makeText(getContext(), "Giúp việc", Toast.LENGTH_SHORT).show();
                 }

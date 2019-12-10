@@ -253,7 +253,6 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="20dp"
                 android:text="Gọi thợ"
-                android:onClick="clickCreatePartnerAccount"
                 android:background="@drawable/blue_fill_rounded_color" />
         </LinearLayout>
 

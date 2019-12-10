@@ -6,83 +6,155 @@
 //import android.database.sqlite.SQLiteDatabase;
 //import android.util.Log;
 //
-//import com.example.arago.DATABASE.DBHelper;
+//import androidx.annotation.NonNull;
+//
 //import com.example.arago.Model.Service;
+//import com.example.arago.Model.Service;
+//import com.example.arago.NonUI;
+//import com.example.arago._USER.Fragment.FragmentHistory;
+//import com.google.android.gms.tasks.OnFailureListener;
+//import com.google.android.gms.tasks.OnSuccessListener;
+//import com.google.firebase.database.DataSnapshot;
+//import com.google.firebase.database.DatabaseError;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
+//import com.google.firebase.database.ValueEventListener;
 //
 //import java.util.ArrayList;
 //import java.util.List;
 //
 //public class ServiceDAO {
-//    private SQLiteDatabase db;
-//    private DBHelper dbHelper;
 //
-//    public static final String TABLE_NAME = "Service";
-//    public static final String SQL_SERVICE = "CREATE TABLE Service (" +
-//            " service_id text primary key," +
-//            " service_name text," +
-//            " service_img int);";
-//    public static final String TAG = "ServiceDAO";
+//    private DatabaseReference mDatabase;
+//    NonUI nonUI;
+//    Context context;
+//    String key;
+//    FragmentHistory fragmentHistory;
+//    public static List<Service> list = new ArrayList<Service>();
 //    public ServiceDAO(Context context) {
-//        dbHelper = new DBHelper(context);
-//        db = dbHelper. getWritableDatabase();
+//        this.mDatabase = FirebaseDatabase.getInstance().getReference("Service");
+//        this.context = context;
+//        this.nonUI = new NonUI(context);
 //    }
 //
-//    // insert
-//    public int inserTheLoai(Service service){
-//        ContentValues values = new ContentValues();
-//        values.put("service_id",service.getService_id());
-//        values.put("service_name",service.getService_name());
-//        values.put("service_img",service.getService_images());
-//        try {
-//            if (db.insert(TABLE_NAME,null,values)== -1){
-//                return -1;
+//    public ServiceDAO(Context context, FragmentHistory fr) {
+//        this.mDatabase = FirebaseDatabase.getInstance().getReference("Service");
+//        this.context = context;
+//        this.nonUI = new NonUI(context);
+//        this.fragmentHistory = fr;
+//    }
+//
+//    public List<Service> getAll() {
+//
+//        ValueEventListener listener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // Get Service object and use the values to update the UI
+//                list.clear();
+//                for (DataSnapshot data:dataSnapshot.getChildren()){
+//                    Service item = data.getValue(Service.class);
+//                    list.add(item);
+//                }
 //            }
-//        }catch (Exception ex){
-//            Log.e(TAG,ex.toString());
-//        }
-//        return 1;
-//    }
-//
-//    // getall
-//    public List<Service> serviceGetAll() {
-//        List<Service> servicesList = new ArrayList<>();
-//        Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
-//        c.moveToFirst();
-//        try {
-//            while (c.isAfterLast() == false) {
-//                Service ee = new Service();
-//                ee.setService_id(c.getString(0));
-//                ee.setService_name(c.getString(1));
-//                ee.setService_images(c.getInt(3));
-//                servicesList.add(ee);
-//                Log.d("//=====", ee.toString());
-//                c.moveToNext();
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                nonUI.toast("Không kết nối Database");
 //            }
-//            c.close();
-//        } catch (Exception e){
-//            Log.d(TAG, e.toString());
-//        }
-//        return servicesList;
+//        };
+//        mDatabase.addValueEventListener(listener);
+//        return list;
 //    }
 //
-//    // update
-//    public int serviceUpdate(Service service){
-//        ContentValues values = new ContentValues();
-//        values.put("service_id", service.getService_id());
-//        values.put("service_name", service.getService_name());
-//        values.put("service_img", service.getService_images());
-//        int result = db.update(TABLE_NAME, values, "service_id=?", new String[]{service.getService_id()});
-//        if (result == 0){
-//            return -1;
-//        }
-//        return 1;
+//    public void insert(Service item) {
+//        key = mDatabase.push().getKey();
+//        mDatabase.child(key).setValue(item)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        nonUI.toast("Đăng ký thành công");
+//                        Log.d("insert","Đăng ký thành công");
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                nonUI.toast("Đăng ký không thành công");
+//                Log.d("insert","Đăng ký không thành công");
+//            }
+//        });
 //    }
 //
-//    // delete
-//    public int serviceDeleteByID(String service){
-//        int result = db.delete(TABLE_NAME,"service_id=?", new String[]{service});
-//        if (result == 0)
-//            return -1;
-//        return 1;
+//    public void delete(final Service item) {
+//
+//        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for(DataSnapshot data : dataSnapshot.getChildren()) {
+//
+//                    if (data.child("service_id").getValue(String.class).equalsIgnoreCase(String.valueOf(item.getService_id()))){
+//                        key = data.getKey();
+//
+//                        Log.d("getKey", "onCreate: key :" + key);
+//
+//                        mDatabase.child(key).removeValue()
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void aVoid) {
+//                                        nonUI.toast("Xóa thành công");
+//                                        Log.d("delete","Xóa thành công");
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        nonUI.toast("Xóa không thành công");
+//                                        Log.d("delete","Xóa không thành công");
+//                                    }
+//                                });
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
+//    }
+//
+//
+//    public void getIdToEqual(final Service item) {
+//
+//        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for(DataSnapshot data : dataSnapshot.getChildren()) {
+//
+//                    if (data.child("service_id").getValue(String.class).equalsIgnoreCase(String.valueOf(item.getService_id()))){
+//                        key = data.getKey();
+//
+//                        Log.d("getKey", "onCreate: key :" + key);
+//
+//                        mDatabase.child(key).removeValue()
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void aVoid) {
+//                                        nonUI.toast("Xóa thành công");
+//                                        Log.d("delete","Xóa thành công");
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        nonUI.toast("Xóa không thành công");
+//                                        Log.d("delete","Xóa không thành công");
+//                                    }
+//                                });
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
 //    }
 //}

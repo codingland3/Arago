@@ -1,11 +1,13 @@
 package com.example.arago.Model;
 
+import java.util.List;
+
 public class Request {
 
     private int request_id, request_description_img;
     private String request_customer_name, request_customer_phone, request_customer_address, request_datetime, request_errortype, request_service_name;
 
-    public Request() {
+    public Request(String customer_phone, String customer_name, String s, List<Order> cart) {
     }
 
     public Request( int request_description_img, String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name) {
