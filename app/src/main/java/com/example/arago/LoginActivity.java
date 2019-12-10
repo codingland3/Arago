@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,11 +34,13 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText username, password;
     CheckBox cb_remember;
+    ProgressBar progressLogin;
     private FirebaseAuth auth;
     SharedPreferences luutru;
     String user, pass;
     List<Customer> customers = new ArrayList<>();
     List<Partner> partners = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +60,16 @@ public class LoginActivity extends AppCompatActivity {
             password.setText(luutru.getString("password", ""));
             cb_remember.setChecked(true);
         }
+
+        // Lấy thông tin từ firebase gán vào list:
+        PartnerDAO partnerDAO = new PartnerDAO(LoginActivity.this);
+        partners = partnerDAO.getAll();
+        CustomerDAO customerDAO = new CustomerDAO(LoginActivity.this);
+        customers = customerDAO.getAll();
     }
 
     private void init() {
+        progressLogin = findViewById(R.id.progressLogin);
         cb_remember = findViewById(R.id.cb_remember);
         username = findViewById(R.id.username_input);
         password = findViewById(R.id.password_input);
@@ -100,10 +110,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void clickLoginWithFirebase(){
-
         // user và pass là 2 biến để get và chứa dữ liệu của editText trong form đăng nhập.
         user = username.getText().toString();
         pass = password.getText().toString();
+        progressLogin.setVisibility(View.VISIBLE);
 
         // Điều kiện để lưu thông tin xuống:
         SharedPreferences.Editor editor = luutru.edit();
@@ -139,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Tài khoản admin gán cứng
             if (user.equals("arago@gmail.com") && pass.equals("123456")) {
+                progressLogin.setVisibility(View.INVISIBLE);
                 Intent intent = new Intent(LoginActivity.this, com.example.arago._ADMIN.MainActivity.class);
                 startActivity(intent);
                 Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách admin", Toast.LENGTH_SHORT).show();
@@ -153,15 +164,11 @@ public class LoginActivity extends AppCompatActivity {
                                 // trình nghe trạng thái auth sẽ được thông báo và logic để xử lý
                                 // người dùng đã đăng nhập có thể được xử lý trong trình nghe.
                                 if (task.isSuccessful()) {
-                                    PartnerDAO partnerDAO = new PartnerDAO(LoginActivity.this);
-                                    partners = partnerDAO.getAll();
-                                    CustomerDAO customerDAO = new CustomerDAO(LoginActivity.this);
-                                    customers = customerDAO.getAll();
-
                                     // Vòng lặp so sánh text từ edittext và danh sách partners
                                     for (int j = 0; j <= partners.size() - 1; j++) {
                                         if (partners.size() > 0) {
                                             if (user.equals(partners.get(j).getPartner_email())) {
+                                                progressLogin.setVisibility(View.INVISIBLE);
                                                 Intent intent = new Intent(LoginActivity.this, com.example.arago._PARTNER.MainActivity.class);
                                                 startActivity(intent);
                                                 Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách cộng tác viên", Toast.LENGTH_SHORT).show();
@@ -174,6 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                                     for (int a = 0; a <= customers.size() - 1; a++) {
                                         if (customers.size() > 0) {
                                             if (user.equals(customers.get(a).getCustomer_email())) {
+                                                progressLogin.setVisibility(View.INVISIBLE);
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                 startActivity(intent);
                                                 Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách người dùng", Toast.LENGTH_SHORT).show();
@@ -181,7 +189,6 @@ public class LoginActivity extends AppCompatActivity {
                                             }
                                         }
                                     }
-
                                 } else {
                                     Toast.makeText(LoginActivity.this,"Sai tài khoản hoặc mật khẩu",Toast.LENGTH_SHORT).show();
                                 }
