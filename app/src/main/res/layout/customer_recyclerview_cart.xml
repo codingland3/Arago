@@ -44,8 +44,8 @@
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:text="Address"/>
-            <TextView
 
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/card_item_errortype"
@@ -54,7 +54,14 @@
                 android:textStyle="bold"
                 android:text="ErrorType"/>
 
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/card_item_price"
+                android:layout_gravity="center_vertical|start"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:text="Price"/>
 
         </LinearLayout>
 

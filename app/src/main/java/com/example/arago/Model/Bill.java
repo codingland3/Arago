@@ -1,18 +1,15 @@
 package com.example.arago.Model;
 
-import java.util.Date;
-
 public class Bill {
 
     private Double bill_price;
     private int bill_id;
-    private String bill_address, bill_errortype, bill_phone, bill_status;
-    private Date bill_datetime;
+    private String bill_address, bill_errortype, bill_phone, bill_status, bill_datetime;
 
     public Bill() {
     }
 
-    public Bill(Double bill_price, int bill_id, String bill_address, String bill_errortype, String bill_phone, String bill_status, Date bill_datetime) {
+    public Bill(Double bill_price, int bill_id, String bill_address, String bill_errortype, String bill_phone, String bill_status, String bill_datetime) {
         this.bill_price = bill_price;
         this.bill_id = bill_id;
         this.bill_address = bill_address;
@@ -70,11 +67,11 @@ public class Bill {
         this.bill_status = bill_status;
     }
 
-    public Date getBill_datetime() {
+    public String getBill_datetime() {
         return bill_datetime;
     }
 
-    public void setBill_datetime(Date bill_datetime) {
+    public void setBill_datetime(String bill_datetime) {
         this.bill_datetime = bill_datetime;
     }
 }

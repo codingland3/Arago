@@ -62,13 +62,9 @@ public class JobList extends AppCompatActivity {
                         startActivity(jobDetalls);
                     }
                 });
-
-
             }
         };
         //set Adapter
-
         recyclerView.setAdapter(adapter);
-
     }
 }

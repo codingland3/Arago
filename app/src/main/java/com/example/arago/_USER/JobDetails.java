@@ -20,14 +20,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 public class JobDetails extends AppCompatActivity {
-    TextView job_namede,job_description;
+    TextView job_namede,job_description, job_price;
     ImageView job_imagesde;
     CollapsingToolbarLayout collapsingToolbarLayout;
     FloatingActionButton btncart;
     String JOBid="";
     FirebaseDatabase database;
     DatabaseReference jobs;
+    public static String PRICE = "price";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class JobDetails extends AppCompatActivity {
         jobs=database.getReference("detailJob");
         //Init view
         btncart=(FloatingActionButton)findViewById(R.id.btncard);
+        job_price = (TextView) findViewById(R.id.service_price);
         job_description=(TextView)findViewById(R.id.service_description);
         job_namede=(TextView)findViewById(R.id.job_namedetails);
         job_imagesde=(ImageView)findViewById(R.id.img_JobDetails);
@@ -59,23 +63,26 @@ public class JobDetails extends AppCompatActivity {
     }
 
     private void OPenOrderFix() {
-        Intent OrderJob=new Intent(JobDetails.this,OrderActivity.class);
-        startActivity(OrderJob);
+        String price = job_price.getText().toString();
+        Intent intent=new Intent(JobDetails.this,OrderActivity.class);
+        intent.putExtra(PRICE, price);
+        startActivity(intent);
     }
 
-    private void getDetailJOb(String jobId) {
+    private void getDetailJOb(final String jobId) {
         jobs.child(jobId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Job JJpb = dataSnapshot.getValue(Job.class);
+                Job job = dataSnapshot.getValue(Job.class);
                 //set Images
-                Picasso.with(getBaseContext()).load(JJpb.getImage()).into(job_imagesde);
+                Picasso.with(getBaseContext()).load(job.getImage()).into(job_imagesde);
 
-                collapsingToolbarLayout.setTitle(JJpb.getName());
-                job_namede.setText(JJpb.getName());
-                job_description.setText(JJpb.getDescription());
+                collapsingToolbarLayout.setTitle(job.getName());
+                job_namede.setText(job.getName());
+                job_description.setText(job.getDescription());
+                job_price.setText(job.getPrice());
 
-                String job = JJpb.getDescription();
+                String getJob = job.getDescription();
             }
 
             @Override
