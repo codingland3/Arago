@@ -14,16 +14,11 @@ import com.example.arago.R;
 
 public class PolicyActivity extends AppCompatActivity {
 
-    private WebView webView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_policy);
         changeStatusBar(getWindow());
-        webView=(WebView)findViewById(R.id.webview);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://trungarago.blogspot.com/p/privacy-policy-trung-built-arago-app-as.html");
     }
 
     public void changeStatusBar(Window window) {

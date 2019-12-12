@@ -15,7 +15,6 @@ public class CauHoiThuongGap extends AppCompatActivity {
     ListView listView;
     String mMainifest[]={"Dịch vụ khách hàng","Arago hoạt động như thế nào?","làm thế nào để đặt dịch vụ","Dịch vụ của Arago có đáng tin hay không","Tôi có thể đặt dịch vụ này định kỳ không?","Tôi có thể thanh toán phí dịch vụ bằng cách nào?","Tôi có thể hủy dịch vụ không?","Tôi có được hoàn tiền nếu hủy dịch vụ?","tôi tích lũy điểm thưởng và đổi điểm thưởng như thế nào?"};
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +45,6 @@ public class CauHoiThuongGap extends AppCompatActivity {
             View view1=getLayoutInflater().inflate(R.layout.rowaskquestion,null);
             TextView name=view1.findViewById(R.id.tvaskquestion);
             name.setText(mMainifest[i]);
-
             return view1;
         }
     }

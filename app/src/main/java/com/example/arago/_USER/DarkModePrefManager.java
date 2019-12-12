@@ -1,20 +1,14 @@
 package com.example.arago._USER;
 
-/**
- * Created by kapil on 20/01/17.
- */
 import android.content.Context;
 import android.content.SharedPreferences;
-
 
 public class DarkModePrefManager {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Context _context;
-
     // shared pref mode
     int PRIVATE_MODE = 0;
-
     // Shared preferences file name
     private static final String PREF_NAME = "education-dark-mode";
 
@@ -35,5 +29,4 @@ public class DarkModePrefManager {
     public boolean isNightMode() {
         return pref.getBoolean(IS_NIGHT_MODE, true);
     }
-
 }

@@ -7,17 +7,13 @@ import android.widget.Toast;
 
 public class NonUI {
     Context context;
-    //test nè
-
 
     public NonUI(Context context) {
         this.context = context;
     }
     // toast non-ui
     public void toast(final String text) {
-
         Handler handler = new Handler(Looper.getMainLooper());
-
         handler.post(new Runnable() {
             public void run() {
                 Toast.makeText(context, text, Toast.LENGTH_LONG).show();

@@ -5,9 +5,9 @@ import java.util.List;
 public class Request {
 
     private int request_id, request_description_img;
-    private String request_customer_name, request_customer_phone, request_customer_address, request_datetime, request_errortype, request_service_name,status;
+    private String request_customer_name, request_customer_phone, request_customer_address, request_datetime, request_errortype, request_service_name, request_status;
 
-    public Request() {
+    public Request(String customer_phone, String customer_name, String s, List<Order> cart) {
     }
 
     public Request(int request_id, int request_description_img, String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name, String status) {
@@ -19,7 +19,7 @@ public class Request {
         this.request_datetime = request_datetime;
         this.request_errortype = request_errortype;
         this.request_service_name = request_service_name;
-        this.status = status;//Default it 0, 0: Placed, 1: shipping, 2: shipped
+        this.request_status = status;//Default it 0, 0: Placed, 1: shipping, 2: shipped
     }
 
     public int getRequest_id() {
@@ -86,11 +86,11 @@ public class Request {
         this.request_service_name = request_service_name;
     }
 
-    public String getStatus() {
-        return status;
+    public String getRequest_status() {
+        return request_status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRequest_status(String request_status) {
+        this.request_status = request_status;
     }
 }

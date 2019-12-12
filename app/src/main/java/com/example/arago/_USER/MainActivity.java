@@ -1,6 +1,5 @@
 package com.example.arago._USER;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,8 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,7 +20,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.arago.R;
-import com.example.arago._USER.Adapter.Main_GridAdapter;
 import com.example.arago._USER.Fragment.FragmentHistory;
 import com.example.arago._USER.Fragment.FragmentHome;
 import com.facebook.share.widget.ShareDialog;
@@ -175,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(MainActivity.this, UserActivity.class);
         startActivity(intent);
     }
-
 
     // TRUYỀN THÔNG TIN FACEBOOK:
 //    public void getBundleData(){

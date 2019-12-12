@@ -9,12 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.arago.CartActivity;
 import com.example.arago.DAO.HistoryDAO;
-import com.example.arago.Model.Order;
 import com.example.arago.R;
-import com.example.arago._USER.Database.Database;
-import com.example.arago._USER.Fragment.FragmentHome;
 import com.example.arago._USER.Model.History;
 
 public class OrderActivity extends AppCompatActivity {
@@ -25,7 +21,7 @@ public class OrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_fix);
+        setContentView(R.layout.activity_form_order);
         anhxa();
 
         Intent intent = getIntent();

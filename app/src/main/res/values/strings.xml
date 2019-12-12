@@ -8,43 +8,123 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="aboutus">
+
+
+        <!--Introduce Page-->
+    <string name="title_aboutus">
+        Giới thiệu về Arago
+    </string>
+    <string name="content_aboutus">
         ARAGO bán dịch vụ chuyên nghiệp của chính bạn.
-
-Người tốt nhất cho công việc không phải lúc nào có như bạn nghĩ ?
-Tìm những người có kỹ năng bạn cần trên ARAGO
-
-Bán dịch vụ trên ARAGO cho phép đưa ra ưu điểm hàng đầu của bạn như: lắp ráp đồ dùng nội thất, dọn dẹp vệ sinh, lắp đồ điện – nước, v.v., ARAGO sẽ bán dịch vụ chuyên nghiệp của bạn trực tiếp cho khách hàng trong khu vực của chính khách hàng.
-
-Với ứng dụng Bán hàng trên  ARAGO, bạn có thể thấy mọi công việc mới trong khu vực của mình và chỉ chọn những công việc phù hợp với lịch trình của bạn. Đó là một cách tuyệt vời để giữ cho doanh nghiệp của bạn bận rộn hoặc để lấp đầy những khoảng trống mở trong suốt cả tuần của bạn.
-
-Những tính năng nổi bật của Arago ?
-
+        \nNgười tốt nhất cho công việc không phải lúc nào có như bạn nghĩ?
+        \nTìm những người có kỹ năng bạn cần trên ARAGO
+        \nBán dịch vụ trên ARAGO cho phép đưa ra ưu điểm hàng đầu của bạn như: lắp ráp đồ dùng nội thất, dọn dẹp vệ sinh, lắp đồ điện – nước, v.v., ARAGO sẽ bán dịch vụ chuyên nghiệp của bạn trực tiếp cho khách hàng trong khu vực của chính khách hàng.
+        \nVới ứng dụng Bán hàng trên  ARAGO, bạn có thể thấy mọi công việc mới trong khu vực của mình và chỉ chọn những công việc phù hợp với lịch trình của bạn. Đó là một cách tuyệt vời để giữ cho doanh nghiệp của bạn bận rộn hoặc để lấp đầy những khoảng trống mở trong suốt cả tuần của bạn.
+        \nNhững tính năng nổi bật của Arago ?
     </string>
-    <string name="listchon1">
-        – Dễ dàng đặt dịch vụ mọi lúc, nơi cùng Arago
-
+    <string name="title_special">
+        Những tính năng nổi bật của Arago ?
     </string>
-    <string name="listchon2">
-        – Đặt Dịch Vụ chỉ với 2 thao tác đơn giản
-
-Đừng quên chọn điểm đến của bạn để nhận thông báo ước lượng về giá dịch vụ.
-
+    <string name="content_special">
+        - Dễ dàng đặt dịch vụ mọi lúc, mọi nơi cùng Arago.
+        \n- Đặt Dịch Vụ chỉ với 2 thao tác đơn giản.
+        \n- Đừng quên chọn điểm đến của bạn để nhận thông báo ước lượng về giá dịch vụ.
+        \n- Dịch vụ viên đến liền đây!.
+        \n- Arago sẽ giúp bạn tìm Dịch Vụ (có DV trống) gần nhất.
     </string>
-    <string name="listchon3">
-        – Dịch vụ viên đến liền đây !
+        <!--/Introduce Page-->
 
+        <!--Privacy Policy Page-->
+    <string name="title_privacy_policy">
+        Privacy Policy
     </string>
-    <string name="listchon4">
-        – Arago sẽ giúp bạn tìm Dịch Vụ (có DV trống) gần nhất.
 
+    <string name="content_01_privacy_policy">
+        Trung built the Arago app as a Free app. This SERVICE is provided by Trung at no cost and is intended for use as is.
+        \n\nThis page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
+        \n\nIf you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy.
+        \n\nThe terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at Arago unless otherwise defined in this Privacy Policy.
     </string>
+
+    <string name="subtitle_01_privacy_policy">
+        Information Collection and Use
+    </string>
+
+    <string name="content_02_privacy_policy">
+        For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to NetWork information. The information that I request will be retained on your device and is not collected by me in any way.
+        \n\nThe app does use third party services that may collect information used to identify you.
+        \n\nLink to privacy policy of third party service providers used by the app
+        \n\n . Google Play Services
+        \n . AdMob
+        \n . Firebase Analytics
+        \n . Facebook
+    </string>
+
+    <string name="subtitle_02_privacy_policy">
+        Log Data
+    </string>
+
+    <string name="content_03_privacy_policy">
+        I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics.
+    </string>
+
+    <string name="subtitle_03_privacy_policy">
+        Cookies
+    </string>
+
+    <string name="content_04_privacy_policy">
+        Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device\'s internal memory.
+        \n\nThis Service does not use these “cookies” explicitly. However, the app may use third party code and libraries that use “cookies” to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service.
+    </string>
+
+    <string name="subtitle_04_privacy_policy">
+        Security
+    </string>
+
+    <string name="content_05_privacy_policy">
+        I value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and I cannot guarantee its absolute security.
+    </string>
+
+    <string name="subtitle_05_privacy_policy">
+        Links to Other Sites
+    </string>
+
+    <string name="content_06_privacy_policy">
+        This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by me. Therefore, I strongly advise you to review the Privacy Policy of these websites. I have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
+    </string>
+
+    <string name="subtitle_06_privacy_policy">
+        Children\'s Privacy
+    </string>
+
+    <string name="content_07_privacy_policy">
+        These Services do not address anyone under the age of 13. I do not knowingly collect personally identifiable information from children under 13. In the case I discover that a child under 13 has provided me with personal information, I immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact me so that I will be able to do necessary actions.
+    </string>
+
+    <string name="subtitle_07_privacy_policy">
+        Changes to This Privacy Policy
+    </string>
+
+    <string name="content_08_privacy_policy">
+        I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.
+    </string>
+
+    <string name="subtitle_08_privacy_policy">
+        Contact Us
+    </string>
+
+    <string name="content_09_privacy_policy">
+        If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at ductrung4263@gmail.com.
+    </string>
+
+
+    <!--/Privacy Policy Page-->
+
 
     <string name="cskh">Mọi Khiếu nại, thắc mắc về dịch vụ của chúng tôi, quý khách vui lòng liên hệ qua số điện thoại của tông đài chăm sóc khách hàng
     </string>
     <string name="dt">113</string>
     <string name="end">để được hỗ trợ tốt nhất</string>
-
     <string name="thanks">Xin cảm ơn quý khách đã tin dùng dịch vụ của chúng tôi</string>
 
 
