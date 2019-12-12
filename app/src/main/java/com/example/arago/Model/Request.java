@@ -5,12 +5,13 @@ import java.util.List;
 public class Request {
 
     private int request_id, request_description_img;
-    private String request_customer_name, request_customer_phone, request_customer_address, request_datetime, request_errortype, request_service_name;
+    private String request_customer_name, request_customer_phone, request_customer_address, request_datetime, request_errortype, request_service_name,status;
 
-    public Request(String customer_phone, String customer_name, String s, List<Order> cart) {
+    public Request() {
     }
 
-    public Request( int request_description_img, String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name) {
+    public Request(int request_id, int request_description_img, String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name, String status) {
+        this.request_id = request_id;
         this.request_description_img = request_description_img;
         this.request_customer_name = request_customer_name;
         this.request_customer_phone = request_customer_phone;
@@ -18,10 +19,15 @@ public class Request {
         this.request_datetime = request_datetime;
         this.request_errortype = request_errortype;
         this.request_service_name = request_service_name;
+        this.status = status;//Default it 0, 0: Placed, 1: shipping, 2: shipped
     }
 
     public int getRequest_id() {
         return request_id;
+    }
+
+    public void setRequest_id(int request_id) {
+        this.request_id = request_id;
     }
 
     public int getRequest_description_img() {
@@ -78,5 +84,13 @@ public class Request {
 
     public void setRequest_service_name(String request_service_name) {
         this.request_service_name = request_service_name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

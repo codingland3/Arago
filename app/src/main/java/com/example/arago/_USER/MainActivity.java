@@ -134,7 +134,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-            Toast.makeText(MainActivity.this, "Help!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Intent.ACTION_SEND);
+
+            intent.setType("text/plain");
+            String sharebody="Your body here";
+            String sharesub="Your Subject here";
+            intent.putExtra(Intent.EXTRA_SUBJECT,sharebody);
+            intent.putExtra(Intent.EXTRA_TEXT,sharebody);
+            startActivity(Intent.createChooser(intent,"sharre using"));
         } else if (id == R.id.nav_help) {
             Intent intent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(intent);

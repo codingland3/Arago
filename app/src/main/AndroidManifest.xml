@@ -11,13 +11,15 @@
         android:roundIcon="@drawable/logo_arago"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="._USER.JobList">
-
-        </activity>
+        <activity android:name=".OrderStatuc"></activity>
+        <activity android:name=".Danhgiaapp" />
+        <activity android:name=".ChatvoiAdmin" />
+        <activity android:name=".CauHoiThuongGap" />
+        <activity android:name=".callCSKHTrung" />
+        <activity android:name="._USER.JobList" />
         <activity android:name="._USER.JobDetails" />
         <activity android:name=".CartActivity" />
         <activity android:name="._USER.OrderActivity" />
-
         <activity android:name="._USER.FormRequestTrangDiemActivity" />
         <activity android:name="._USER.FormRequestGiupViecActivity" />
         <activity android:name="._USER.FormRequestXayDungActivity" />

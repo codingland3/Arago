@@ -28,6 +28,7 @@ import com.example.arago._USER.Fragment.FragmentHistory;
 import com.example.arago._USER.Fragment.FragmentHome;
 import com.example.arago._USER.HelpActivity;
 import com.example.arago._USER.PolicyActivity;
+import com.example.arago._USER.Share;
 import com.example.arago._USER.UserActivity;
 import com.facebook.share.widget.ShareDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -126,7 +127,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-            Toast.makeText(MainActivity.this, "Help!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, Share.class);
+            intent.setType("text/plain");
+            String sharebody="Your body here";
+            String sharesub="Your Subject here";
+            intent.putExtra(Intent.EXTRA_SUBJECT,sharebody);
+            intent.putExtra(Intent.EXTRA_TEXT,sharebody);
+            startActivity(Intent.createChooser(intent,"sharre using"));
         } else if (id == R.id.nav_help) {
             Intent intent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(intent);

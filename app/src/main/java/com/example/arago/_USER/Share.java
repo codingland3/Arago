@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.arago.R;
 
-public class PolicyActivity extends AppCompatActivity {
+public class Share extends AppCompatActivity {
 
     private WebView webView;
 
@@ -21,9 +21,7 @@ public class PolicyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_policy);
         changeStatusBar(getWindow());
-        webView=(WebView)findViewById(R.id.webview);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://trungarago.blogspot.com/p/privacy-policy-trung-built-arago-app-as.html");
+
     }
 
     public void changeStatusBar(Window window) {

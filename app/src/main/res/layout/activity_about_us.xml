@@ -40,9 +40,66 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#DADADA"/>
 
+
+    <ImageView
+        android:id="@+id/imgarago"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:scaleX="0.3"
+        android:background="@drawable/logo_arago"
+
+        ></ImageView>
+
+    <ScrollView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollviewaboutus">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:lineSpacingExtra="2dp"
+        android:textSize="20dp"
+        android:text="@string/aboutus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvAboutUs"
+        ></TextView>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/listchon1"
+          android:layout_marginTop="20dp"
+          android:lineSpacingExtra="2dp"
+          ></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/listchon2"
+                android:layout_marginTop="20dp"
+                android:lineSpacingExtra="2dp"
+                ></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/listchon3"
+                android:layout_marginTop="20dp"
+                android:lineSpacingExtra="2dp"
+                ></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/listchon4"
+                android:layout_marginTop="20dp"
+                android:lineSpacingExtra="2dp"
+                ></TextView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

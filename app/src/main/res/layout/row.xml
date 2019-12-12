@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    >
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/logo_arago"
+        android:id="@+id/imagesHelp"
+        >
+
+    </ImageView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+
+        >
+        <TextView
+            android:id="@+id/tvmain"
+            android:layout_weight="10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Main Type"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"></TextView>
+
+        <ImageView
+            android:id="@+id/iconhelp2"
+            android:layout_weight="1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_build"></ImageView>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -8,4 +8,44 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="aboutus">
+        ARAGO bán dịch vụ chuyên nghiệp của chính bạn.
+
+Người tốt nhất cho công việc không phải lúc nào có như bạn nghĩ ?
+Tìm những người có kỹ năng bạn cần trên ARAGO
+
+Bán dịch vụ trên ARAGO cho phép đưa ra ưu điểm hàng đầu của bạn như: lắp ráp đồ dùng nội thất, dọn dẹp vệ sinh, lắp đồ điện – nước, v.v., ARAGO sẽ bán dịch vụ chuyên nghiệp của bạn trực tiếp cho khách hàng trong khu vực của chính khách hàng.
+
+Với ứng dụng Bán hàng trên  ARAGO, bạn có thể thấy mọi công việc mới trong khu vực của mình và chỉ chọn những công việc phù hợp với lịch trình của bạn. Đó là một cách tuyệt vời để giữ cho doanh nghiệp của bạn bận rộn hoặc để lấp đầy những khoảng trống mở trong suốt cả tuần của bạn.
+
+Những tính năng nổi bật của Arago ?
+
+    </string>
+    <string name="listchon1">
+        – Dễ dàng đặt dịch vụ mọi lúc, nơi cùng Arago
+
+    </string>
+    <string name="listchon2">
+        – Đặt Dịch Vụ chỉ với 2 thao tác đơn giản
+
+Đừng quên chọn điểm đến của bạn để nhận thông báo ước lượng về giá dịch vụ.
+
+    </string>
+    <string name="listchon3">
+        – Dịch vụ viên đến liền đây !
+
+    </string>
+    <string name="listchon4">
+        – Arago sẽ giúp bạn tìm Dịch Vụ (có DV trống) gần nhất.
+
+    </string>
+
+    <string name="cskh">Mọi Khiếu nại, thắc mắc về dịch vụ của chúng tôi, quý khách vui lòng liên hệ qua số điện thoại của tông đài chăm sóc khách hàng
+    </string>
+    <string name="dt">113</string>
+    <string name="end">để được hỗ trợ tốt nhất</string>
+
+    <string name="thanks">Xin cảm ơn quý khách đã tin dùng dịch vụ của chúng tôi</string>
+
+
 </resources>
