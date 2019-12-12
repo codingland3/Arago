@@ -43,27 +43,6 @@ public class HistoryDAO {
         this.fragmentHistory = fr;
     }
 
-    public List<History> getAll() {
-
-        ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get History object and use the values to update the UI
-                list.clear();
-                for (DataSnapshot data:dataSnapshot.getChildren()){
-                    History item = data.getValue(History.class);
-                    list.add(item);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                nonUI.toast("Không kết nối Database");
-            }
-        };
-        mDatabase.addValueEventListener(listener);
-        return list;
-    }
-
     public void insert(History item) {
         key = mDatabase.push().getKey();
         mDatabase.child(key).setValue(item)

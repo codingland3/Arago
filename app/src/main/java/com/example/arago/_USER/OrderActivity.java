@@ -26,23 +26,16 @@ public class OrderActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String price = intent.getStringExtra(JobDetails.PRICE);
+        final String service_name = intent.getStringExtra(JobDetails.SERVICE_NAME);
         txtBillPrice.setText(price);
 
         txtClickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                new Database(getBaseContext()).addtocard(new Order(
-//                        edthovaten.getText().toString(),
-//                        edtSDT.getText().toString(),
-//                        edtAddress.getText().toString(),
-//                        edtyeucau.getText().toString()
-//                ));
-
-                String name = edtName.getText().toString();
                 String time = edtTime.getText().toString();
 
                 historyDAO = new HistoryDAO(OrderActivity.this);
-                History history = new History(name, time, price);
+                History history = new History(service_name, time, price);
                 historyDAO.insert(history);
                 Toast.makeText(OrderActivity.this, "Đặt thành công", Toast.LENGTH_SHORT).show();
             }
@@ -52,13 +45,10 @@ public class OrderActivity extends AppCompatActivity {
     private void anhxa() {
         txtBillPrice = (TextView) findViewById(R.id.bill_price);
         txtClickButton=(TextView)findViewById(R.id.tvClickCreatePartnerAccount);
-
         edtName=(EditText)findViewById(R.id.request_customer_name);
         edtPhone=(EditText)findViewById(R.id.request_customer_phone);
         edtAddress=(EditText)findViewById(R.id.request_customer_address);
         edtProblem=(EditText)findViewById(R.id.request_problem);
         edtTime = (EditText) findViewById(R.id.request_time);
-
-
     }
 }

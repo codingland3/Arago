@@ -109,8 +109,6 @@ public class PartnerFragment extends Fragment {
     }
 
 
-
-
     public void clickAddPartner (){
         floatingActionButton.show();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

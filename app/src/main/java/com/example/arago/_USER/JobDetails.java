@@ -30,6 +30,7 @@ public class JobDetails extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference jobs;
     public static String PRICE = "price";
+    public static String SERVICE_NAME = "svname";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +64,10 @@ public class JobDetails extends AppCompatActivity {
 
     private void OPenOrderFix() {
         String price = job_price.getText().toString();
+        String service_name = job_namede.getText().toString();
         Intent intent=new Intent(JobDetails.this,OrderActivity.class);
         intent.putExtra(PRICE, price);
+        intent.putExtra(SERVICE_NAME, service_name);
         startActivity(intent);
     }
 
@@ -80,8 +83,6 @@ public class JobDetails extends AppCompatActivity {
                 job_namede.setText(job.getName());
                 job_description.setText(job.getDescription());
                 job_price.setText(job.getPrice());
-
-                String getJob = job.getDescription();
             }
 
             @Override

@@ -2,7 +2,10 @@ package com.example.arago._USER.Model;
 
 public class History {
 
-    String Name, Date, Price;
+    private String Name, Date, Price;
+
+    public History() {
+    }
 
     public History(String name, String date, String price) {
         Name = name;
