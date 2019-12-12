@@ -37,7 +37,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvNameService, tvName, tvPhone, tvAddress, tvDate, tvMota;
+        public TextView tvNameService, tvName, tvPhone, tvAddress, tvDate, tvMota, tvPrice;
         public ImageView imgAccept;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -47,8 +47,9 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
             tvAddress = itemView.findViewById(R.id.tvAddress);
             tvPhone = itemView.findViewById(R.id.tvPhone);
             tvDate = itemView.findViewById(R.id.tvDateTime);
-            tvMota = itemView.findViewById(R.id.tvMota);
-            imgAccept = itemView.findViewById(R.id.iv_accept);
+            tvMota = itemView.findViewById(R.id.tvErrorType);
+            tvPrice = itemView.findViewById(R.id.tvPrice);
+            imgAccept = itemView.findViewById(R.id.iv_Accept);
         }
     }
 
@@ -75,6 +76,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         holder.tvAddress.setText(request.getRequest_customer_address());
         holder.tvDate.setText(request.getRequest_datetime());
         holder.tvMota.setText(request.getRequest_errortype());
+        holder.tvPrice.setText(request.getRequest_price());
 
         holder.imgAccept.setOnClickListener(new View.OnClickListener() {
             @Override

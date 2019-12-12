@@ -1,25 +1,23 @@
 package com.example.arago.Model;
 
-import java.util.List;
-
 public class Request {
 
-    private int request_id, request_description_img;
-    private String request_customer_name, request_customer_phone, request_customer_address, request_datetime, request_errortype, request_service_name, request_status;
 
-    public Request(String customer_phone, String customer_name, String s, List<Order> cart) {
+    private int request_id;
+    private String request_customer_name, request_customer_phone, request_customer_address, request_datetime, request_errortype, request_service_name, request_price;
+
+    public Request() {
     }
 
-    public Request(int request_id, int request_description_img, String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name, String status) {
+    public Request(String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name, String request_price) {
         this.request_id = request_id;
-        this.request_description_img = request_description_img;
         this.request_customer_name = request_customer_name;
         this.request_customer_phone = request_customer_phone;
         this.request_customer_address = request_customer_address;
         this.request_datetime = request_datetime;
         this.request_errortype = request_errortype;
         this.request_service_name = request_service_name;
-        this.request_status = status;//Default it 0, 0: Placed, 1: shipping, 2: shipped
+        this.request_price = request_price;
     }
 
     public int getRequest_id() {
@@ -28,14 +26,6 @@ public class Request {
 
     public void setRequest_id(int request_id) {
         this.request_id = request_id;
-    }
-
-    public int getRequest_description_img() {
-        return request_description_img;
-    }
-
-    public void setRequest_description_img(int request_description_img) {
-        this.request_description_img = request_description_img;
     }
 
     public String getRequest_customer_name() {
@@ -86,11 +76,11 @@ public class Request {
         this.request_service_name = request_service_name;
     }
 
-    public String getRequest_status() {
-        return request_status;
+    public String getRequest_price() {
+        return request_price;
     }
 
-    public void setRequest_status(String request_status) {
-        this.request_status = request_status;
+    public void setRequest_price(String request_price) {
+        this.request_price = request_price;
     }
 }

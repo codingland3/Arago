@@ -25,7 +25,6 @@ import com.example.arago._USER.AboutUsActivity;
 import com.example.arago._USER.BottomNavigationBehavior;
 import com.example.arago._USER.DarkModePrefManager;
 import com.example.arago._USER.Fragment.FragmentHistory;
-import com.example.arago._USER.Fragment.FragmentHome;
 import com.example.arago._USER.HelpActivity;
 import com.example.arago._USER.PolicyActivity;
 import com.example.arago._USER.Share;
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView bottomNavigationView;
     private static final int MODE_DARK = 0;
     private static final int MODE_LIGHT = 1;
-    ShareDialog shareDialog;
 
     // BottomNav
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

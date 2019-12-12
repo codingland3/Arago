@@ -10,13 +10,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.arago.DAO.HistoryDAO;
+import com.example.arago.DAO.RequestDAO;
+import com.example.arago.Model.Request;
 import com.example.arago.R;
 import com.example.arago._USER.Model.History;
 
 public class OrderActivity extends AppCompatActivity {
     TextView txtClickButton, txtBillPrice;
-    String JOBid="";
     HistoryDAO historyDAO;
+    RequestDAO requestDAO;
     EditText edtName,edtPhone,edtAddress, edtTime, edtProblem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,20 @@ public class OrderActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String time = edtTime.getText().toString();
 
+                String request_customer_name = edtName.getText().toString();
+                String request_customer_phone = edtPhone.getText().toString();
+                String request_customer_address = edtAddress.getText().toString();
+                String request_datetime = edtTime.getText().toString();
+                String request_errortype = edtProblem.getText().toString();
+                String request_service_name = service_name;
+                String request_price = price;
+
+                // Tạo bảng request cho cộng tác viên
+                requestDAO = new RequestDAO(OrderActivity.this);
+                Request request = new Request(request_customer_name, request_customer_phone, request_customer_address, request_datetime, request_errortype, request_service_name, request_price);
+                requestDAO.insert(request);
+
+                // Tạo bảng lịch sử của khách hàng
                 historyDAO = new HistoryDAO(OrderActivity.this);
                 History history = new History(service_name, time, price);
                 historyDAO.insert(history);

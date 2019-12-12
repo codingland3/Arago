@@ -41,23 +41,13 @@ public class FragmentRequest extends Fragment {
     DatabaseReference mDatabase;
     LinearLayoutManager mLayoutManager;
 
-    private FirebaseAuth mAuth;
-    private TextView tvClickCreatePartnerAccount;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.layout_request, container, false);
 
-        rv_Request = (RecyclerView) view.findViewById(R.id.rv_partner);
-
+        rv_Request = (RecyclerView) view.findViewById(R.id.rv_request);
 
         requestDAO = new RequestDAO(getActivity());
         requestList = new ArrayList<Request>();
@@ -93,7 +83,7 @@ public class FragmentRequest extends Fragment {
     }
 
     public void listViewUpdate(){
-        adapter.notifyItemInserted(requestList.size());
+//        adapter.notifyItemInserted(requestList.size());
         adapter.notifyDataSetChanged();
     }
 }
