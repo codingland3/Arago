@@ -20,16 +20,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.arago.R;
+import com.example.arago._PARTNER.Fragment.FragmentHistory;
 import com.example.arago._PARTNER.Fragment.FragmentRequest;
 import com.example.arago._USER.AboutUsActivity;
 import com.example.arago._USER.BottomNavigationBehavior;
 import com.example.arago._USER.DarkModePrefManager;
-import com.example.arago._USER.Fragment.FragmentHistory;
 import com.example.arago._USER.HelpActivity;
 import com.example.arago._USER.PolicyActivity;
 import com.example.arago._USER.Share;
 import com.example.arago._USER.UserActivity;
-import com.facebook.share.widget.ShareDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String sharesub="Your Subject here";
             intent.putExtra(Intent.EXTRA_SUBJECT,sharebody);
             intent.putExtra(Intent.EXTRA_TEXT,sharebody);
-            startActivity(Intent.createChooser(intent,"sharre using"));
+            startActivity(Intent.createChooser(intent,"share using"));
         } else if (id == R.id.nav_help) {
             Intent intent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(intent);

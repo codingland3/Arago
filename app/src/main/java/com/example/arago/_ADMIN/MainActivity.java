@@ -22,14 +22,13 @@ import androidx.fragment.app.Fragment;
 import com.example.arago._ADMIN.Fragment.FragmentStatistic;
 import com.example.arago._ADMIN.Fragment.PartnerFragment;
 import com.example.arago.R;
-import com.example.arago._PARTNER.Fragment.FragmentRequest;
+import com.example.arago._PARTNER.Fragment.FragmentHistory;
 import com.example.arago._USER.AboutUsActivity;
 import com.example.arago._USER.BottomNavigationBehavior;
 import com.example.arago._USER.DarkModePrefManager;
-import com.example.arago._USER.Fragment.FragmentHistory;
-import com.example.arago._USER.Fragment.FragmentHome;
 import com.example.arago._USER.HelpActivity;
 import com.example.arago._USER.PolicyActivity;
+import com.example.arago._USER.Share;
 import com.example.arago._USER.UserActivity;
 import com.facebook.share.widget.ShareDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView bottomNavigationView;
     private static final int MODE_DARK = 0;
     private static final int MODE_LIGHT = 1;
-    ShareDialog shareDialog;
 
     // BottomNav
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -96,8 +94,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         layoutParams.setBehavior(new BottomNavigationBehavior());
 
         bottomNavigationView.setSelectedItemId(R.id.navigationStatistic);
-        //handling floating action menu
 
+        // handling floating action menu
 //        shareDialog = new ShareDialog(this);
 //        Bundle inBundle = getIntent().getExtras();
 //        String name = inBundle.get("name").toString();
@@ -106,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //
 //        TextView nameView = (TextView) findViewById(R.id.textViewUser);
 //        nameView.setText("Hello " + surname);
-
     }
 
     @Override
@@ -131,7 +128,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-            Toast.makeText(MainActivity.this, "Help!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, Share.class);
+            intent.setType("text/plain");
+            String sharebody="Your body here";
+            String sharesub="Your Subject here";
+            intent.putExtra(Intent.EXTRA_SUBJECT,sharebody);
+            intent.putExtra(Intent.EXTRA_TEXT,sharebody);
+            startActivity(Intent.createChooser(intent,"sharre using"));
         } else if (id == R.id.nav_help) {
             Intent intent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(intent);

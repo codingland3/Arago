@@ -1,6 +1,7 @@
 package com.example.arago._USER.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +12,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arago.DAO.PartnerDAO;
+import com.example.arago.DAO.PartnerHistoryDAO;
 import com.example.arago.DAO.RequestDAO;
-import com.example.arago.Model.Partner;
+import com.example.arago.Model.PartnerHistory;
 import com.example.arago.Model.Request;
 import com.example.arago.R;
-import com.example.arago._ADMIN.Adapter.PartnerAdapter;
-import com.example.arago._ADMIN.Fragment.PartnerFragment;
 import com.example.arago._PARTNER.Fragment.FragmentRequest;
-
 import java.util.List;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHolder>{
     public Context context;
-    RequestDAO requestDAO;
     FragmentRequest fragmentRequest;
     List<Request> arrPartner;
+    PartnerHistoryDAO partnerHistoryDAO;
+    RequestDAO requestDAO;
 
     // Constructor
     public RequestAdapter(Context context, List<Request> list, FragmentRequest fr) {
@@ -81,8 +80,28 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         holder.imgAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                partnerDAO = new PartnerDAO(context);
-//                partnerFragment.partnerDelete(partner);
+                String serviceName = request.getRequest_service_name();
+                String customerName = request.getRequest_customer_name();
+                String customerPhone = request.getRequest_customer_phone();
+                String customerAddress = request.getRequest_customer_address();
+                String dateTime = request.getRequest_datetime();
+                String errorType = request.getRequest_errortype();
+                String price = request.getRequest_price();
+                int partner_history_id = 1;
+
+                // Tạo bảng lịch sử cho cộng tác viên
+                partnerHistoryDAO = new PartnerHistoryDAO(context);
+                PartnerHistory partnerHistory = new PartnerHistory (partner_history_id, serviceName, customerName, customerPhone, customerAddress, dateTime, errorType, price);
+                partnerHistoryDAO.insert(partnerHistory);
+
+
+
+                // VẪN CHƯA XÓA ĐƯỢC TẠI CHƯA CÓ ID REQUEST:
+//                // Xóa dòng dữ liệu đã được click
+//                fragmentRequest.partnerDelete(request);
+
+                //
+
 
             }
         });
@@ -92,4 +111,5 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     public int getItemCount() {
         return arrPartner.size();
     }
+
 }

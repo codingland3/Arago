@@ -131,13 +131,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         } else if (id == R.id.nav_share) {
             Intent intent = new Intent(Intent.ACTION_SEND);
-
             intent.setType("text/plain");
             String sharebody="Your body here";
             String sharesub="Your Subject here";
             intent.putExtra(Intent.EXTRA_SUBJECT,sharebody);
             intent.putExtra(Intent.EXTRA_TEXT,sharebody);
-            startActivity(Intent.createChooser(intent,"sharre using"));
+            startActivity(Intent.createChooser(intent,"share using"));
         } else if (id == R.id.nav_help) {
             Intent intent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(intent);
@@ -187,5 +186,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            hm.putString("imgUrl", imageUrl);
 //        return hm;
 //    }
-    //
 }

@@ -36,32 +36,14 @@ public class RequestDAO {
         this.nonUI = new NonUI(context);
     }
 
+    public RequestDAO() {
+    }
+
     public RequestDAO(Context context, FragmentHistory fr) {
         this.mDatabase = FirebaseDatabase.getInstance().getReference("Request");
         this.context = context;
         this.nonUI = new NonUI(context);
         this.fragmentHistory = fr;
-    }
-
-    public List<Request> getAll() {
-
-        ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Request object and use the values to update the UI
-                list.clear();
-                for (DataSnapshot data:dataSnapshot.getChildren()){
-                    Request item = data.getValue(Request.class);
-                    list.add(item);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                nonUI.toast("Không kết nối Database");
-            }
-        };
-        mDatabase.addValueEventListener(listener);
-        return list;
     }
 
     public void insert(Request item) {
@@ -81,8 +63,6 @@ public class RequestDAO {
             }
         });
     }
-
-
 
     public void delete(final Request item) {
 
