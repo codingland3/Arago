@@ -43,6 +43,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
+    implementation 'com.github.mancj:MaterialSearchBar:0.7.5'
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
 }

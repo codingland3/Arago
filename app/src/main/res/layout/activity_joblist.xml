@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="._USER.JobList">
+
+
+
+
+    <com.mancj.materialsearchbar.MaterialSearchBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchbar"></com.mancj.materialsearchbar.MaterialSearchBar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -11,4 +20,4 @@
         android:id="@+id/recyclerview_listjob"
         android:scrollbars="vertical"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
