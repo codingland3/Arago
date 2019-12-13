@@ -100,7 +100,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 //                // Xóa dòng dữ liệu đã được click
 //                fragmentRequest.partnerDelete(request);
 
-                //
+                ///
 
 
             }
