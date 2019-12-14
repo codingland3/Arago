@@ -43,10 +43,11 @@ public class OrderActivity extends AppCompatActivity {
                 String request_errortype = edtProblem.getText().toString();
                 String request_service_name = service_name;
                 String request_price = price;
+                int request_id = 1;
 
                 // Tạo bảng request cho cộng tác viên
                 requestDAO = new RequestDAO(OrderActivity.this);
-                Request request = new Request(request_customer_name, request_customer_phone, request_customer_address, request_datetime, request_errortype, request_service_name, request_price);
+                Request request = new Request(request_id, request_customer_name, request_customer_phone, request_customer_address, request_datetime, request_errortype, request_service_name, request_price);
                 requestDAO.insert(request);
 
                 // Tạo bảng lịch sử của khách hàng

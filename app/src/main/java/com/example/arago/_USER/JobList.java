@@ -179,4 +179,8 @@ public class JobList extends AppCompatActivity {
         //set Adapter
         recyclerView.setAdapter(adapter);
     }
+
+    public void clickBack(View view) {
+        finish();
+    }
 }

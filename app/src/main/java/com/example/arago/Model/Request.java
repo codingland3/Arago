@@ -9,7 +9,7 @@ public class Request {
     public Request() {
     }
 
-    public Request(String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name, String request_price) {
+    public Request(int request_id, String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name, String request_price) {
         this.request_id = request_id;
         this.request_customer_name = request_customer_name;
         this.request_customer_phone = request_customer_phone;
@@ -19,6 +19,17 @@ public class Request {
         this.request_service_name = request_service_name;
         this.request_price = request_price;
     }
+//
+//    public Request(String request_customer_name, String request_customer_phone, String request_customer_address, String request_datetime, String request_errortype, String request_service_name, String request_price) {
+//        this.request_id = request_id;
+//        this.request_customer_name = request_customer_name;
+//        this.request_customer_phone = request_customer_phone;
+//        this.request_customer_address = request_customer_address;
+//        this.request_datetime = request_datetime;
+//        this.request_errortype = request_errortype;
+//        this.request_service_name = request_service_name;
+//        this.request_price = request_price;
+//    }
 
     public int getRequest_id() {
         return request_id;

@@ -36,8 +36,12 @@
 
         </LinearLayout>
 
-
     </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#DADADA"/>
 
     <ListView
         android:layout_width="match_parent"

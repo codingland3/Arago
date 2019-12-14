@@ -6,13 +6,51 @@
     android:orientation="vertical"
     tools:context="._USER.JobList">
 
+    <!-- ToolBar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_backspace"
+                android:layout_gravity="center"
+                android:onClick="clickBack" />
+
+            <TextView
+                android:layout_weight="10"
+                android:text="Dịch vụ"
+                android:layout_marginRight="65dp"
+                android:gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="18dp"/>
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
 
 
     <com.mancj.materialsearchbar.MaterialSearchBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchbar"></com.mancj.materialsearchbar.MaterialSearchBar>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/searchbar"/>
+    <View
+        android:background="@color/cardBackgroundColor"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

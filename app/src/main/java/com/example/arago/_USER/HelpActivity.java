@@ -25,8 +25,8 @@ import com.example.arago.callCSKHTrung;
 public class HelpActivity extends AppCompatActivity {
 
     ListView listView;
-    String mMaintest[]={"Tong dai CSKH","Cau hoi thuong gap","Chat voi Admin","Danh gia ung dung"};
-    int[]imagesss={R.drawable.ic_address_update,R.drawable.ic_customer,R.drawable.ic_done_black_24dp,R.drawable.ic_effort};
+    String mMaintest[]={"Tổng đài CSKH","Câu hỏi thường gặp","Chat với Admin","Đánh giá ứng dụng"};
+    int[]imagesss={R.drawable.ic_phone,R.drawable.ic_question_answer,R.drawable.ic_chat,R.drawable.ic_done_black_24dp};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,6 @@ public class HelpActivity extends AppCompatActivity {
         listView=findViewById(R.id.listviewhelp);
         CustomerCSKH customerCSKH=new CustomerCSKH();
         listView.setAdapter(customerCSKH);
-        changeStatusBar(getWindow());
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -55,13 +54,6 @@ public class HelpActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public void changeStatusBar(Window window) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(this.getResources().getColor(R.color.contentStatusBar));
-        }
     }
 
     public void clickBack(View view) {
