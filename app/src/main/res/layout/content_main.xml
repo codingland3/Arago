@@ -36,7 +36,7 @@
                     app:civ_border_width="2dp"
                     app:civ_border_color="@color/imageBorderColor"
                     android:src="@drawable/ic_person"
-                    android:onClick="clickToUserInformation"
+
                     android:layout_alignParentRight="true" />
 
                 <ImageView

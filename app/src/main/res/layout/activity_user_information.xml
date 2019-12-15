@@ -70,7 +70,7 @@
         android:background="@drawable/lightgray_fill_rounded_color">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileCircleImageView"
+            android:id="@+id/profileCircleImageView2"
             android:layout_gravity="center_horizontal"
             android:layout_width="60dp"
             android:layout_height="60dp"

@@ -2,24 +2,34 @@ package com.example.arago._USER;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.arago.GetStartedActivity;
 import com.example.arago.R;
 import com.example.arago._USER.Adapter.User_GridAdapter;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserActivity extends AppCompatActivity {
 
@@ -27,7 +37,11 @@ public class UserActivity extends AppCompatActivity {
     User_GridAdapter user_gridAdapter;
     Integer change_password = 0, update_address = 1, service_manager = 2;
     EditText change_pass_old_pass, change_pass_new_pass, change_pass_new_pass_confirm;
+    TextView tvten,tvid;
+    CircleImageView circleImageView2;
     private FirebaseAuth auth;
+    GoogleSignInClient mGoogleSignInClient;
+    Button btnlogout;
     View v;
 
     String[] values = {
@@ -46,7 +60,9 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_information);
-
+        tvid=findViewById(R.id.profileUserID);
+        tvten=findViewById(R.id.profileUsername);
+        circleImageView2=findViewById(R.id.profileCircleImageView2);
         // Tham chiếu và đưa dữ liệu lên gridview
         gridView = (GridView) findViewById(R.id.gv_user_information);
         user_gridAdapter = new User_GridAdapter(this, values, images);
@@ -77,6 +93,46 @@ public class UserActivity extends AppCompatActivity {
                 // </Code>
             }
         });
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        btnlogout=findViewById(R.id.btn_logout);
+        btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    // ...
+                    case R.id.btn_logout:
+                        signOut();
+                        break;
+                    // ...
+                }
+            }
+        });
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            Uri personPhoto = acct.getPhotoUrl();
+            tvid.setText(personId);
+            tvten.setText(personName);
+            Glide.with(this).load(String.valueOf(personPhoto)).into(circleImageView2);
+        }
+    }
+
+    public void signOut(){
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+                       Intent intent=new Intent(UserActivity.this,GetStartedActivity.class);
+                       startActivity(intent);
+                    }
+                });
     }
 
     public void clickBack(View view) {
@@ -86,9 +142,23 @@ public class UserActivity extends AppCompatActivity {
     public void clickLogout(View view) {
         FirebaseAuth.getInstance().signOut();
         LoginManager.getInstance().logOut();
+
         Intent login = new Intent(UserActivity.this, GetStartedActivity.class);
         startActivity(login);
         finish();
+    }
+
+
+    private void revokeAccess() {
+        mGoogleSignInClient.revokeAccess()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+                        Intent login = new Intent(UserActivity.this, GetStartedActivity.class);
+                        startActivity(login);
+                    }
+                });
     }
 
     public void clickChangeAvatar(View view) {

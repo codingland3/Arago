@@ -5,23 +5,31 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.arago.DAO.CustomerDAO;
 import com.example.arago.DAO.PartnerDAO;
 import com.example.arago.Model.Customer;
 import com.example.arago.Model.Partner;
 import com.example.arago._USER.MainActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -40,7 +48,9 @@ public class LoginActivity extends AppCompatActivity {
     String user, pass;
     List<Customer> customers = new ArrayList<>();
     List<Partner> partners = new ArrayList<>();
-
+    ImageView imggmail;
+    GoogleSignInClient mGoogleSignInClient;
+    int RC_SIGN_IN=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +60,18 @@ public class LoginActivity extends AppCompatActivity {
         init();
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+        imggmail=findViewById(R.id.gmaillogin);
+        imggmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.gmaillogin:
+                        signIn();
+                        break;
+                    // ...
+                }
+            }
+        });
 
         // Get sharePreferent
         luutru = getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);  // MODE_PRIVATE thì chỉ ứng dụng này mới có thể đọc được thôi.
@@ -66,6 +88,42 @@ public class LoginActivity extends AppCompatActivity {
         partners = partnerDAO.getAll();
         CustomerDAO customerDAO = new CustomerDAO(LoginActivity.this);
         customers = customerDAO.getAll();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            // Signed in successfully, show authenticated UI.
+            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("Error", "signInResult:failed code=" + e.getStatusCode());
+
+        }
     }
 
     private void init() {

@@ -1,6 +1,7 @@
 package com.example.arago._USER.Fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.arago.R;
 import com.example.arago._USER.Adapter.Main_CardViewAdapter;
 import com.example.arago._USER.Adapter.Main_GridAdapter;
 import com.example.arago.Model.Event;
 import com.example.arago._USER.JobList;
+import com.example.arago._USER.UserActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +69,15 @@ public class FragmentHome extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_main, container, false);
         init();
-
+    tvHello=view.findViewById(R.id.textViewUser);
+    circleImageView=view.findViewById(R.id.profileCircleImageView);
+    circleImageView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent=new Intent(getActivity(), UserActivity.class);
+            startActivity(intent);
+        }
+    });
 //
 //        MainActivity activity = (MainActivity) getActivity();
 //
@@ -79,6 +92,19 @@ public class FragmentHome extends Fragment {
 
 
         // Tham chiếu và đưa dữ liệu lên gridview
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            Uri personPhoto = acct.getPhotoUrl();
+
+            tvHello.setText("xin chao "+personName);
+            Glide.with(this).load(String.valueOf(personPhoto)).into(circleImageView);
+
+
+        }
         gridServices = (GridView) view.findViewById(R.id.main_gv_services);
         main_gridAdapter = new Main_GridAdapter(getContext(), values, images);
         gridServices.setAdapter(main_gridAdapter);
