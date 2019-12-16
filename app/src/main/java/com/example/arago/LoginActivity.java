@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         partners = partnerDAO.getAll();
         CustomerDAO customerDAO = new CustomerDAO(LoginActivity.this);
         customers = customerDAO.getAll();
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -98,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -110,6 +112,7 @@ public class LoginActivity extends AppCompatActivity {
             handleSignInResult(task);
         }
     }
+
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -173,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
         pass = password.getText().toString();
         progressLogin.setVisibility(View.VISIBLE);
 
-        // Điều kiện để lưu thông tin xuống:
+        // Điều kiện để lưu thông tin xuống: ghi nho tai khoan
         SharedPreferences.Editor editor = luutru.edit();
         if(cb_remember.isChecked()){
             editor.putString("username", String.valueOf(user));
@@ -181,6 +184,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         editor.putBoolean("save_information", cb_remember.isChecked());
         editor.commit();
+
 
         if (user.isEmpty()) {
             username.setError("Mời nhập tài khoản");
@@ -222,33 +226,36 @@ public class LoginActivity extends AppCompatActivity {
                                 // trình nghe trạng thái auth sẽ được thông báo và logic để xử lý
                                 // người dùng đã đăng nhập có thể được xử lý trong trình nghe.
                                 if (task.isSuccessful()) {
-                                    // Vòng lặp so sánh text từ edittext và danh sách partners
-                                    for (int j = 0; j <= partners.size() - 1; j++) {
-                                        if (partners.size() > 0) {
-                                            if (user.equals(partners.get(j).getPartner_email())) {
-                                                progressLogin.setVisibility(View.INVISIBLE);
-                                                Intent intent = new Intent(LoginActivity.this, com.example.arago._PARTNER.MainActivity.class);
-                                                startActivity(intent);
-                                                Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách cộng tác viên", Toast.LENGTH_SHORT).show();
-                                                return;
+                                    try {
+                                        // Vòng lặp so sánh text từ edittext và danh sách partners
+                                        for (int j = 0; j <= partners.size() - 1; j++) {
+                                            if (partners.size() > 0) {
+                                                if (user.equals(partners.get(j).getPartner_email())) {
+                                                    progressLogin.setVisibility(View.INVISIBLE);
+                                                    Intent intent = new Intent(LoginActivity.this, com.example.arago._PARTNER.MainActivity.class);
+                                                    startActivity(intent);
+                                                    Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách cộng tác viên", Toast.LENGTH_SHORT).show();
+                                                    return;
+                                                }
                                             }
                                         }
-                                    }
 
-                                    // Vòng lặp so sánh text từ edittext và danh sách customers
-                                    for (int a = 0; a <= customers.size() - 1; a++) {
-                                        if (customers.size() > 0) {
-                                            if (user.equals(customers.get(a).getCustomer_email())) {
-                                                progressLogin.setVisibility(View.INVISIBLE);
-                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                startActivity(intent);
-                                                Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách người dùng", Toast.LENGTH_SHORT).show();
-                                                return;
+                                        // Vòng lặp so sánh text từ edittext và danh sách customers
+                                        for (int a = 0; a <= customers.size() - 1; a++) {
+                                            if (customers.size() > 0) {
+                                                if (user.equals(customers.get(a).getCustomer_email())) {
+                                                    progressLogin.setVisibility(View.INVISIBLE);
+                                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                    startActivity(intent);
+                                                    Toast.makeText(LoginActivity.this, "Bạn đã đăng nhập với tư cách người dùng", Toast.LENGTH_SHORT).show();
+                                                    return;
+                                                }
                                             }
                                         }
+                                    } catch (NullPointerException e) {
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
+                                        progressLogin.setVisibility(View.INVISIBLE);
                                     }
-                                } else {
-                                    Toast.makeText(LoginActivity.this,"Sai tài khoản hoặc mật khẩu",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
