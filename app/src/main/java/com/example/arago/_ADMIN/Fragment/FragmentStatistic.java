@@ -1,9 +1,11 @@
 package com.example.arago._ADMIN.Fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class FragmentStatistic extends Fragment {
 
     DatabaseReference mData;
     TextView tvTongTien, tvLaisuat, tvCustomer, tvPartner;
+    GridView gridView;
     double tongTien = 0;
     double tienLai;
     int soluongPartner = 0, soluongCustomer = 0;
@@ -51,7 +54,6 @@ public class FragmentStatistic extends Fragment {
 
         CustomerDAO customerDAO =  new CustomerDAO(getContext());
         customerList = customerDAO.getAll();
-
 
         tvTongTien = view.findViewById(R.id.tv_statistic_tongtien);
         tvCustomer = view.findViewById(R.id.tv_statistic_customer);
@@ -87,10 +89,10 @@ public class FragmentStatistic extends Fragment {
                         }
                     }
 
-                    tvTongTien.setText(tongTien + "");
-                    tvLaisuat.setText(tienLai + "");
-                    tvCustomer.setText(soluongCustomer + "");
+                    tvTongTien.setText(tongTien + " VND");
+                    tvLaisuat.setText(tienLai + "\nVND");
                     tvPartner.setText(soluongPartner + "");
+                    tvCustomer.setText(soluongCustomer + "");
 
                 } catch (NumberFormatException e){
                     Toast.makeText(getContext(), "Dữ liệu trống", Toast.LENGTH_SHORT).show();
