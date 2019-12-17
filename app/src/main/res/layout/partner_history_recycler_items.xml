@@ -24,38 +24,38 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_cell_name"
+                android:id="@+id/tv_cell_name_partner_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="Tên dịch vụ: "/>
 
             <TextView
-                android:id="@+id/tv_cell_date"
+                android:id="@+id/tv_cell_date_partner_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ngày đặt: "/>
 
             <TextView
-                android:id="@+id/tv_cell_customer_name"
+                android:id="@+id/tv_cell_customer_name_partner_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tên khách hàng: "/>
 
             <TextView
-                android:id="@+id/tv_cell_customer_phone"
+                android:id="@+id/tv_cell_customer_phone_partner_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Số điện thoại: "/>
 
             <TextView
-                android:id="@+id/tv_cell_customer_address"
+                android:id="@+id/tv_cell_customer_address_partner_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Địa chỉ: "/>
 
             <TextView
-                android:id="@+id/tv_cell_problem"
+                android:id="@+id/tv_cell_problem_partner_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mô tả: "/>
@@ -64,7 +64,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_cell_price"
+        android:id="@+id/tv_cell_price_partner_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Price: 100$"

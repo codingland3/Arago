@@ -91,7 +91,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
                 // Tạo bảng lịch sử cho cộng tác viên
                 partnerHistoryDAO = new PartnerHistoryDAO(context);
-                PartnerHistory partnerHistory = new PartnerHistory (partner_history_id, serviceName, customerName, customerPhone, customerAddress, dateTime, errorType, price);
+                PartnerHistory partnerHistory = new PartnerHistory ( serviceName, dateTime, customerName, customerPhone, customerAddress, errorType, price);
                 partnerHistoryDAO.insert(partnerHistory);
 
 

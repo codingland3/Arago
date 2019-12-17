@@ -43,13 +43,14 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvName, tvEmail;
-        public ImageView imgXoa;
+        public ImageView imgXoa, imgAvatar;
 
         public ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             imgXoa = itemView.findViewById(R.id.iv_delete_cell_partner);
             tvName = itemView.findViewById(R.id.tv_cell_partner_name);
             tvEmail = itemView.findViewById(R.id.tv_cell_partner_email);
+            imgAvatar = itemView.findViewById(R.id.img_cell_partner_avatar);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,6 +85,7 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.ViewHold
 
         holder.tvName.setText(partner.getPartner_name());
         holder.tvEmail.setText(partner.getPartner_email());
+        holder.imgAvatar.setImageResource(partner.getPartner_images());
 
         holder.imgXoa.setOnClickListener(new View.OnClickListener() {
             @Override

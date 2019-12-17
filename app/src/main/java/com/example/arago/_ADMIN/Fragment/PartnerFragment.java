@@ -58,6 +58,8 @@ public class PartnerFragment extends Fragment {
     LinearLayoutManager mLayoutManager;
     Dialog myDialog;
 
+    int image;
+
     TextView txtClose;
     String partnerNamePopup, partnerEmailPopup, partnerAddressPopup, partnerPhonePopup, partnerCMNDPopup;
 
@@ -261,8 +263,12 @@ public class PartnerFragment extends Fragment {
         final String phone = _txtPhone.getText().toString().trim();
         final String cmnd = _txtCMND.getText().toString().trim();
 //        final int image = Integer.parseInt(_ivAvatar.getResources().toString().trim());
-        final int image = R.drawable.emthree;
 
+        if (sex == "Nữ"){
+            image = R.drawable.emtwo;
+        } else {
+            image = R.drawable.emone;
+        }
 
         if (id.isEmpty()) {
             _txtID.setError("Không được bỏ trống trường này");

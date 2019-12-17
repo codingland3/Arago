@@ -2,30 +2,21 @@ package com.example.arago.Model;
 
 public class PartnerHistory {
 
-    private int history_id;
+//    private int history_id;
     private String history_customer_name, history_customer_phone, history_customer_address, history_datetime, history_errortype, history_service_name, history_price;
 
     public PartnerHistory(){
 
     }
 
-    public PartnerHistory(int history_id, String history_customer_name, String history_customer_phone, String history_customer_address, String history_datetime, String history_errortype, String history_service_name, String history_price) {
-        this.history_id = history_id;
+    public PartnerHistory( String history_service_name, String history_datetime, String history_customer_name, String history_customer_phone, String history_customer_address, String history_errortype, String history_price) {
+        this.history_service_name = history_service_name;
+        this.history_datetime = history_datetime;
         this.history_customer_name = history_customer_name;
         this.history_customer_phone = history_customer_phone;
         this.history_customer_address = history_customer_address;
-        this.history_datetime = history_datetime;
         this.history_errortype = history_errortype;
-        this.history_service_name = history_service_name;
         this.history_price = history_price;
-    }
-
-    public int getHistory_id() {
-        return history_id;
-    }
-
-    public void setHistory_id(int history_id) {
-        this.history_id = history_id;
     }
 
     public String getHistory_customer_name() {

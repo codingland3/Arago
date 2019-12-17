@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <TextView
-        android:id="@+id/tvIndexManagerPartner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="QUẢN LÝ CỘNG TÁC VIÊN"
-        android:textSize="25sp"
-        android:textColor="@color/primaryTextColor"
-        android:gravity="center_horizontal"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@+id/tvIndexManagerPartner"

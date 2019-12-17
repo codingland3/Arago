@@ -34,14 +34,14 @@ public class PartnerHistory_Adapter extends RecyclerView.Adapter<PartnerHistory_
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tv_cell_name);
-            tvDate = itemView.findViewById(R.id.tv_cell_date);
-            tvPrice = itemView.findViewById(R.id.tv_cell_price);
+            tvName = itemView.findViewById(R.id.tv_cell_name_partner_history);
+            tvDate = itemView.findViewById(R.id.tv_cell_date_partner_history);
+            tvCustomerName = itemView.findViewById(R.id.tv_cell_customer_name_partner_history);
+            tvCustomerPhone = itemView.findViewById(R.id.tv_cell_customer_phone_partner_history);
+            tvAddress = itemView.findViewById(R.id.tv_cell_customer_address_partner_history);
+            tvProblem = itemView.findViewById(R.id.tv_cell_problem_partner_history);
+            tvPrice = itemView.findViewById(R.id.tv_cell_price_partner_history);
 
-            tvCustomerName = itemView.findViewById(R.id.tv_cell_customer_name);
-            tvAddress = itemView.findViewById(R.id.tv_cell_customer_address);
-            tvCustomerPhone = itemView.findViewById(R.id.tv_cell_customer_phone);
-            tvProblem = itemView.findViewById(R.id.tv_cell_problem);
         }
     }
 
@@ -62,13 +62,13 @@ public class PartnerHistory_Adapter extends RecyclerView.Adapter<PartnerHistory_
         // - thay the noi dung cua view voi phan tu do
         final PartnerHistory partnerHistory = arrHistory.get(position);
 
-        holder.tvName.setText(partnerHistory.getHistory_customer_name());
-        holder.tvDate.setText("Ngày đặt: " + partnerHistory.getHistory_datetime());
-        holder.tvPrice.setText(partnerHistory.getHistory_price() + " VND");
+        holder.tvName.setText(partnerHistory.getHistory_service_name());
         holder.tvCustomerName.setText("Tên khách hàng: " + partnerHistory.getHistory_customer_name());
-        holder.tvCustomerPhone.setText("Số điện thoại: " + partnerHistory.getHistory_customer_phone());
+        holder.tvDate.setText("Ngày đặt: " + partnerHistory.getHistory_datetime());
         holder.tvAddress.setText("Địa chỉ: " + partnerHistory.getHistory_customer_address());
+        holder.tvCustomerPhone.setText("Số điện thoại: " + partnerHistory.getHistory_customer_phone());
         holder.tvProblem.setText("Mô tả: " + partnerHistory.getHistory_errortype());
+        holder.tvPrice.setText(partnerHistory.getHistory_price() + " VND");
     }
 
     @Override
