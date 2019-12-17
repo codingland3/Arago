@@ -119,13 +119,60 @@
     <!--/Privacy Policy Page-->
 
 
-
-
+    <!--CSKH-->
     <string name="cskh">Mọi Khiếu nại, thắc mắc về dịch vụ của chúng tôi, quý khách vui lòng liên hệ qua số điện thoại của tông đài chăm sóc khách hàng
     </string>
-    <string name="dt">113</string>
+    <string name="dt">1900xxxx</string>
     <string name="end">để được hỗ trợ tốt nhất</string>
     <string name="thanks">Xin cảm ơn quý khách đã tin dùng dịch vụ của chúng tôi</string>
+    <!--/CSKH-->
 
+    <!--Ask-Question-->
+    <string name="group1">Dịch vụ khách hàng</string>
+    <string name="group2">Arago hoạt động như thế nào?</string>
+    <string name="group3">Làm thế nào để đặt dịch vụ</string>
+    <string name="group4">Dịch vụ của Arago có đáng tin hay không</string>
+    <string name="group5">Tôi có thể đặt dịch vụ này định kỳ không?</string>
+    <string name="group6">Tôi có thể thanh toán phí dịch vụ bằng cách nào?</string>
+    <string name="group7">Tôi có thể hủy dịch vụ không?</string>
+    <string name="group8">Tôi có được hoàn tiền nếu hủy dịch vụ?</string>
+    <string name="group9">AraGO có trên Apple Store không?</string>
+
+    <string-array name="group1">
+        <item>Quý khách hàng có thể kết nối trực tiếp với dịch vụ khách hàng của chúng tôi thông qua hotline 0971231131 hoặc gửi mail đến địa chỉ info@arago.net.vn. Tất cả các yêu cầu hỗ trợ của người dùng đều được phản hồi, muộn nhất trong vòng 24h kể từ khi nhận được yêu cầu.</item>
+    </string-array>
+
+    <string-array name="group2">
+        <item>AraGO là một hệ thống công nghệ được phát triển bởi công ty TNHH Truyền Thông Việt Nam VCPRO nhằm tạo ra cầu nối trực tiếp giữa khách hàng và người cung cấp dịch vụ.</item>
+    </string-array>
+
+    <string-array name="group3">
+        <item>Bạn có thể truy cập trang web www.arago.vn hoặc tải ứng dụng AraGO tại google play để thực hiện việc đặt yêu cầu dịch vụ. Các yêu cầu dịch vụ của bạn sẽ được hệ thống quản lý và phân công kỹ thuật viên tới xử lý cho bạn theo đúng lịch hẹn.</item>
+    </string-array>
+
+    <string-array name="group4">
+        <item>Toàn bộ CTV của hệ thống AraGO đều được xác minh nhân thân, đã qua kiểm tra và đào tạo kĩ năng chuyên môn. Vì vậy, bạn có thể hoàn toàn yên tâm với dịch vụ của AraGO.</item>
+    </string-array>
+
+    <string-array name="group5">
+        <item>iten1</item>
+    </string-array>
+
+    <string-array name="group6">
+        <item>AraGO cung cấp nhiều hình thức thanh toán khác nhau cho bạn lựa chọn, như: thanh toán bằng tiền mặt trực tiếp cho CTV sau khi thực hiện xong dịch vụ, thanh toán bằng thẻ nội địa hoặc thẻ tín dụng, hoặc nạp trực tiếp vào tài khoản của AraGO thông qua thẻ cào, sms, thẻ thanh toán nội địa, thẻ tín dụng.</item>
+    </string-array>
+
+    <string-array name="group7">
+        <item>Bạn có thể hủy dịch vụ đã đặt theo quy định của nhà phát hành bằng cách liên hệ trực tiếp với chúng tôi qua số hotline 1900xxxx để được hỗ trợ chi tiết.</item>
+    </string-array>
+
+    <string-array name="group8">
+        <item>Trong trường hợp bạn đã thanh toán trước dịch vụ, sau khi nhà phát hành và bạn đã thỏa thuận hủy dịch vụ thành công bạn sẽ được nhận lại phần tiền đã thanh toán vào tài khoản của bạn trên AraGO sau khi đã trừ đi phí phạt (nếu có).</item>
+    </string-array>
+
+    <string-array name="group9">
+        <item>AraGO vẫn chưa được phát triển trên hệ điều hành iOS. Hiện tại AraGO đã phát triển hoàn thiện các bước đặt hàng trên web và google play. AraGO sẽ mở rộng phạm vi trong tương lai gần để đáp ứng nhu cầu khách hàng.</item>
+    </string-array>
+    <!--/Ask-Question-->
 
 </resources>

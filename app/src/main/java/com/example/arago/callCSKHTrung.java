@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class callCSKHTrung extends AppCompatActivity {
 
@@ -12,5 +13,9 @@ public class callCSKHTrung extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_cskhtrung);
         Intent intent=getIntent();
+    }
+
+    public void clickBack(View view) {
+        finish();
     }
 }

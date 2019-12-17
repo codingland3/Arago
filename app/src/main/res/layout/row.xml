@@ -24,6 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Main Type"
+            android:textSize="17sp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"/>
 

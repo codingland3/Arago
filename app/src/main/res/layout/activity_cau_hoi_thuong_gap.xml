@@ -3,11 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CauHoiThuongGap">
 
-    <ListView
+    <!-- ToolBar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lvAskQuestion"></ListView>
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_backspace"
+                android:layout_gravity="center"
+                android:onClick="clickBack" />
+
+            <TextView
+                android:layout_weight="10"
+                android:layout_marginRight="65dp"
+                android:gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Câu hỏi thường gặp"
+                android:textColor="@color/colorAccent"
+                android:textSize="18dp"/>
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ExpandableListView
+        android:id="@+id/expand_ask_question"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

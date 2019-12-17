@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arago.DAO.CustomerDAO;
 import com.example.arago.DAO.PartnerDAO;
@@ -23,7 +24,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -31,6 +40,11 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView _ivAvatar;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    DatabaseReference reff;
+
+    String id = "0";
+    long maxid = 0;
+    Customer customer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +53,26 @@ public class RegisterActivity extends AppCompatActivity {
         changeStatusBar(getWindow());
         init();
         mAuth = FirebaseAuth.getInstance();
+
+        customer = new Customer();
+        reff = FirebaseDatabase.getInstance().getReference().child("Customer");
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists())
+                    // LƯU Ý, VIẾT KIỂU NÀY KHÔNG ĐƯỢC XÓA BẤT KÌ DỮ LIỆU NGƯỜI DÙNG NÀO TRÊN FIREBASE.
+                    // Đếm số lượng và gán cho maxid
+                    maxid = (dataSnapshot.getChildrenCount());
+                    // id = maxid +1
+                    id = String.valueOf(maxid+1);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override
@@ -86,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String address = _txtAddress.getText().toString().trim();
         final String phone = _txtPhone.getText().toString().trim();
 //        final int image = Integer.parseInt(_ivAvatar.getResources().toString().trim());
+
 
         final int image = R.drawable.emthree;
 
@@ -150,14 +185,18 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-//            progressBar.setVisibility(View.VISIBLE);
+            //            progressBar.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 //                  progressBar.setVisibility(View.GONE);
-                    final Customer customer = new Customer(image, name, email, password, address, phone);
-                    CustomerDAO customerDAO = new CustomerDAO(RegisterActivity.this);
-                    customerDAO.insert(customer);
+                    if (task.isSuccessful()) {
+                        final Customer customer = new Customer(image, id, name, email, password, address, phone);
+                        CustomerDAO customerDAO = new CustomerDAO(RegisterActivity.this);
+                        customerDAO.insert(customer);
+                    }else {
+                        Toast.makeText(RegisterActivity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 

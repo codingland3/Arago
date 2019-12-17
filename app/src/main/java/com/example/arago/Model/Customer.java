@@ -3,19 +3,28 @@ package com.example.arago.Model;
 public class Customer {
 
     private int customer_images;
-    private String customer_name, customer_email, customer_pass, customer_address, customer_phone;
+    private String customer_id, customer_name, customer_email, customer_pass, customer_address, customer_phone;
 
     public Customer() {
 
     }
 
-    public Customer(int customer_images, String customer_name, String customer_email, String customer_pass, String customer_address, String customer_phone) {
+    public Customer(int customer_images, String customer_id, String customer_name, String customer_email, String customer_pass, String customer_address, String customer_phone) {
         this.customer_images = customer_images;
+        this.customer_id = customer_id;
         this.customer_name = customer_name;
         this.customer_email = customer_email;
         this.customer_pass = customer_pass;
         this.customer_address = customer_address;
         this.customer_phone = customer_phone;
+    }
+
+    public String getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(String customer_id) {
+        this.customer_id = customer_id;
     }
 
     public int getCustomer_images() {

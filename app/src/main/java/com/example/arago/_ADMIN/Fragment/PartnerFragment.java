@@ -1,12 +1,19 @@
 package com.example.arago._ADMIN.Fragment;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -14,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +51,11 @@ public class PartnerFragment extends Fragment {
     PartnerDAO partnerDAO;
     DatabaseReference mDatabase;
     LinearLayoutManager mLayoutManager;
+    Dialog myDialog;
+
+    private RecyclerView.Adapter mAdapter;
+    TextView txtClose;
+    private AdapterView.OnItemClickListener mListener;
 
     private EditText _txtID, _txtFullName, _txtBirthDay, _txtEmail, _txtPass, _txtPassConfirm, _txtPhone, _txtAddress, _txtCMND;
     private RadioButton _radioMale, _radioFemale;
@@ -69,18 +82,20 @@ public class PartnerFragment extends Fragment {
 
         partnerDAO = new PartnerDAO(getActivity());
         partnerList = new ArrayList<Partner>();
+        adapter = new PartnerAdapter(getActivity(),partnerList,this);
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Partner");
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                partnerList.clear();
                 for (DataSnapshot data:dataSnapshot.getChildren()){
                     Partner item = data.getValue(Partner.class);
                     partnerList.add(item);
                 }
                 listViewUpdate();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -93,9 +108,65 @@ public class PartnerFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         rv_partner.setLayoutManager(mLayoutManager);
 
-        adapter=new PartnerAdapter(getActivity(),partnerList,this);
         rv_partner.setAdapter(adapter);
+
+        myDialog = new Dialog(getContext());
+
+
+        showPopup(getView());
+
         return view;
+    }
+
+    public interface onItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(AdapterView.OnItemClickListener listener){
+        mListener = listener;
+    }
+
+    public static class ExampleViewHolder extends RecyclerView.ViewHolder{
+
+        public ImageView mImageView;
+        public TextView tvName;
+        public TextView tvEmail;
+
+        public ExampleViewHolder(@NonNull View itemView, AdapterView.OnItemClickListener listener) {
+            super(itemView);
+            tvName = itemView.findViewById(R.id.tv_cell_name);
+            tvEmail = itemView.findViewById(R.id.tv_cell_email);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+    }
+
+    public void showPopup(View view){
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+
+        // Gắn layout vào view
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        view = inflater.inflate(R.layout.popup_partner_layout, null);
+        myDialog.setContentView(view);
+        txtClose = view.findViewById(R.id.tv_close_partner_popup);
+        txtClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        // Set kích thước dialog
+        myDialog.getWindow().setLayout((6 * width)/7, (3 * height)/7);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 
     public void partnerDelete(Partner c){
