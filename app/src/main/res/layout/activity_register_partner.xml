@@ -125,7 +125,7 @@
                 android:background="@drawable/blue_border_rounded_cornwe">
 
                 <!-- INPUT -->
-                <EditText
+                <TextView
                     android:id="@+id/register_birthday"
                     android:hint="Ngày sinh"
                     android:textSize="15sp"

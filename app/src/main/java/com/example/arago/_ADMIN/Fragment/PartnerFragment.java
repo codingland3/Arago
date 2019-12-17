@@ -1,17 +1,20 @@
 package com.example.arago._ADMIN.Fragment;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -30,6 +33,7 @@ import com.example.arago._ADMIN.Adapter.PartnerAdapter;
 import com.example.arago.DAO.PartnerDAO;
 import com.example.arago.R;
 import com.example.arago.Model.Partner;
+import com.example.arago._USER.OrderActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,6 +46,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class PartnerFragment extends Fragment {
@@ -57,13 +62,16 @@ public class PartnerFragment extends Fragment {
     TextView txtClose;
     private AdapterView.OnItemClickListener mListener;
 
-    private EditText _txtID, _txtFullName, _txtBirthDay, _txtEmail, _txtPass, _txtPassConfirm, _txtPhone, _txtAddress, _txtCMND;
+    private EditText _txtID, _txtFullName, _txtEmail, _txtPass, _txtPassConfirm, _txtPhone, _txtAddress, _txtCMND;
+    private TextView _txtBirthDay;
     private RadioButton _radioMale, _radioFemale;
     private RadioGroup _radioGroupSex;
     private String sex;
     private FirebaseAuth mAuth;
     private FloatingActionButton floatingActionButton;
     private TextView tvClickCreatePartnerAccount;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    static final String TAG="QLSV";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -193,7 +201,7 @@ public class PartnerFragment extends Fragment {
 
                 _txtID = (EditText) v.findViewById(R.id.register_id);
                 _txtFullName = (EditText) v.findViewById(R.id.register_name);
-                _txtBirthDay = (EditText) v.findViewById(R.id.register_birthday);
+                _txtBirthDay = (TextView) v.findViewById(R.id.register_birthday);
                 _radioGroupSex = (RadioGroup) v.findViewById(R.id.radioGroupSex);
                 _radioMale = (RadioButton) v.findViewById(R.id.radio_btn_male);
                 _radioFemale = (RadioButton) v.findViewById(R.id.radio_btn_female);
@@ -203,6 +211,32 @@ public class PartnerFragment extends Fragment {
                 _txtPhone = (EditText) v.findViewById(R.id.register_phone);
                 _txtAddress = (EditText) v.findViewById(R.id.register_address);
                 _txtCMND = (EditText) v.findViewById(R.id.register_cmnd);
+
+                _txtBirthDay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Calendar calendar=Calendar.getInstance();
+                        int year=calendar.get(Calendar.YEAR);
+                        int month=calendar.get(Calendar.MONTH);
+                        int day=calendar.get(Calendar.DAY_OF_MONTH);
+                        DatePickerDialog dialog= new DatePickerDialog(
+                                getActivity(),android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                                mDateSetListener,
+                                year,month,day
+                        );
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.show();
+                    }
+                });
+                mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        month = month +1;
+                        Log.d(TAG,"onDateSet:mm/dd/yyyy: "+dayOfMonth+"/"+month+"/"+year);
+                        String date = "   "+dayOfMonth +"/"+month+"/"+year;
+                        _txtBirthDay.setText(date);
+                    }
+                } ;
 
                 tvClickCreatePartnerAccount = v.findViewById(R.id.tvClickCreatePartnerAccount);
                 tvClickCreatePartnerAccount.setOnClickListener(new View.OnClickListener() {

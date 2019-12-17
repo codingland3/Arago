@@ -75,14 +75,14 @@ public class FragmentStatistic extends Fragment {
                         }
                     }
 
-                    for (int j = 0; j <= partnerList.size() - 1; j++) {
+                    for (int j = 0; j <= partnerList.size() ; j++) {
                         if (partnerList.size() > 0) {
                             // Tổng cộng tác viên:
                             soluongPartner = j;
                         }
                     }
 
-                    for (int k = 0; k <= customerList.size() - 1; k++) {
+                    for (int k = 0; k <= customerList.size(); k++) {
                         if (customerList.size() > 0) {
                             // Tổng cộng người dùng:
                             soluongCustomer = k;
