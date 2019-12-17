@@ -151,7 +151,7 @@ public class PartnerFragment extends Fragment {
         TextView emailPopup = view.findViewById(R.id.tv_popup_email);
         TextView addressPopup = view.findViewById(R.id.tv_popup_address);
         TextView phonePopup = view.findViewById(R.id.tv_popup_phone);
-        TextView cmndPopup = view.findViewById(R.id.tv_popup_address);
+        TextView cmndPopup = view.findViewById(R.id.tv_popup_cmnd);
 
         namePopup.setText(partnerNamePopup);
         emailPopup.setText(partnerEmailPopup);

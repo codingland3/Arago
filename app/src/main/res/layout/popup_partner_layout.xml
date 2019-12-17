@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="5dp"
     android:layout_gravity="center"
-    android:background="@color/colorPrimaryDark">
+    android:background="#272F5C">
 
     <TextView
         android:id="@+id/tv_close_partner_popup"
