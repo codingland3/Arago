@@ -72,7 +72,7 @@ public class OrderActivity extends AppCompatActivity {
         txtClickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String time = edtTime.getText().toString();
+                String time = tvDate.getText().toString();
 
                 String request_customer_name = edtName.getText().toString();
                 String request_customer_phone = edtPhone.getText().toString();
