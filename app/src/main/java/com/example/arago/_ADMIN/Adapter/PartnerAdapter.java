@@ -23,6 +23,16 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.ViewHold
     PartnerFragment partnerFragment;
     List<Partner> arrPartner;
 
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     // Constructor
     public PartnerAdapter(Context context, List<Partner> list, PartnerFragment fr) {
         this.context = context;
@@ -32,16 +42,26 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvName, tvPhone, tvEmail, tvAddress, tvCMND;
+        public TextView tvName, tvEmail;
         public ImageView imgXoa;
-        public ViewHolder(View itemView) {
+
+        public ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             imgXoa = itemView.findViewById(R.id.iv_delete_cell_partner);
-            tvName = itemView.findViewById(R.id.tv_cell_name);
-            tvPhone = itemView.findViewById(R.id.tv_cell_phone);
-            tvEmail = itemView.findViewById(R.id.tv_cell_email);
-            tvAddress = itemView.findViewById(R.id.tv_cell_address);
-            tvCMND = itemView.findViewById(R.id.tv_cell_cmnd);
+            tvName = itemView.findViewById(R.id.tv_cell_partner_name);
+            tvEmail = itemView.findViewById(R.id.tv_cell_partner_email);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null){
+                        int posititon = getAdapterPosition();
+                        if (posititon != RecyclerView.NO_POSITION){
+                            listener.onItemClick(posititon);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -52,7 +72,7 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.ViewHold
         View v = LayoutInflater.from(context)
                 .inflate(R.layout.partner_recycler_items, parent, false);
         // gan cac thuoc tinh nhu size, margins, paddings.....
-        return new PartnerAdapter.ViewHolder(v);
+        return new PartnerAdapter.ViewHolder(v, mListener);
     }
 
 
@@ -63,10 +83,7 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.ViewHold
         final Partner partner = arrPartner.get(position);
 
         holder.tvName.setText(partner.getPartner_name());
-        holder.tvPhone.setText(partner.getPartner_phone());
         holder.tvEmail.setText(partner.getPartner_email());
-        holder.tvAddress.setText(partner.getPartner_address());
-        holder.tvCMND.setText(partner.getPartner_cmnd());
 
         holder.imgXoa.setOnClickListener(new View.OnClickListener() {
             @Override

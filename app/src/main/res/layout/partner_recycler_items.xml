@@ -18,46 +18,29 @@
         <ImageView
             android:src="@drawable/emthree"
             android:layout_margin="10dp"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/tv_cell_name"
+                android:id="@+id/tv_cell_partner_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name: "
                 android:paddingTop="5dp"/>
 
             <TextView
-                android:id="@+id/tv_cell_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Phone: "/>
-
-            <TextView
-                android:id="@+id/tv_cell_email"
+                android:id="@+id/tv_cell_partner_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Email: "/>
 
-            <TextView
-                android:id="@+id/tv_cell_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Adress: "/>
-
-            <TextView
-                android:id="@+id/tv_cell_cmnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CMND: "
-                android:paddingBottom="5dp"/>
         </LinearLayout>
     </LinearLayout>
 

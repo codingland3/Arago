@@ -58,19 +58,18 @@ public class PartnerFragment extends Fragment {
     LinearLayoutManager mLayoutManager;
     Dialog myDialog;
 
-    private RecyclerView.Adapter mAdapter;
     TextView txtClose;
-    private AdapterView.OnItemClickListener mListener;
+    String partnerNamePopup, partnerEmailPopup, partnerAddressPopup, partnerPhonePopup, partnerCMNDPopup;
 
     private EditText _txtID, _txtFullName, _txtEmail, _txtPass, _txtPassConfirm, _txtPhone, _txtAddress, _txtCMND;
     private TextView _txtBirthDay;
     private RadioButton _radioMale, _radioFemale;
-    private RadioGroup _radioGroupSex;
     private String sex;
     private FirebaseAuth mAuth;
     private FloatingActionButton floatingActionButton;
     private TextView tvClickCreatePartnerAccount;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
     static final String TAG="QLSV";
 
     @Override
@@ -121,37 +120,20 @@ public class PartnerFragment extends Fragment {
         myDialog = new Dialog(getContext());
 
 
-        showPopup(getView());
 
+        adapter.setOnItemClickListener(new PartnerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // Lấy thông tin theo vị trí click của recyclerview
+                partnerNamePopup = partnerList.get(position).getPartner_name();
+                partnerEmailPopup = partnerList.get(position).getPartner_email();
+                partnerAddressPopup = partnerList.get(position).getPartner_address();
+                partnerPhonePopup = partnerList.get(position).getPartner_phone();
+                partnerCMNDPopup = partnerList.get(position).getPartner_cmnd();
+                showPopup(getView());
+            }
+        });
         return view;
-    }
-
-    public interface onItemClickListener{
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener(AdapterView.OnItemClickListener listener){
-        mListener = listener;
-    }
-
-    public static class ExampleViewHolder extends RecyclerView.ViewHolder{
-
-        public ImageView mImageView;
-        public TextView tvName;
-        public TextView tvEmail;
-
-        public ExampleViewHolder(@NonNull View itemView, AdapterView.OnItemClickListener listener) {
-            super(itemView);
-            tvName = itemView.findViewById(R.id.tv_cell_name);
-            tvEmail = itemView.findViewById(R.id.tv_cell_email);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-        }
     }
 
     public void showPopup(View view){
@@ -163,6 +145,20 @@ public class PartnerFragment extends Fragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         view = inflater.inflate(R.layout.popup_partner_layout, null);
         myDialog.setContentView(view);
+
+        // init
+        TextView namePopup = view.findViewById(R.id.tv_popup_name);
+        TextView emailPopup = view.findViewById(R.id.tv_popup_email);
+        TextView addressPopup = view.findViewById(R.id.tv_popup_address);
+        TextView phonePopup = view.findViewById(R.id.tv_popup_phone);
+        TextView cmndPopup = view.findViewById(R.id.tv_popup_address);
+
+        namePopup.setText(partnerNamePopup);
+        emailPopup.setText(partnerEmailPopup);
+        addressPopup.setText("Địa chỉ: " + partnerAddressPopup);
+        phonePopup.setText("Số điện thoại: " + partnerPhonePopup);
+        cmndPopup.setText("Chứng minh thư: " + partnerCMNDPopup);
+
         txtClose = view.findViewById(R.id.tv_close_partner_popup);
         txtClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,7 +198,6 @@ public class PartnerFragment extends Fragment {
                 _txtID = (EditText) v.findViewById(R.id.register_id);
                 _txtFullName = (EditText) v.findViewById(R.id.register_name);
                 _txtBirthDay = (TextView) v.findViewById(R.id.register_birthday);
-                _radioGroupSex = (RadioGroup) v.findViewById(R.id.radioGroupSex);
                 _radioMale = (RadioButton) v.findViewById(R.id.radio_btn_male);
                 _radioFemale = (RadioButton) v.findViewById(R.id.radio_btn_female);
                 _txtEmail = (EditText) v.findViewById(R.id.register_email);

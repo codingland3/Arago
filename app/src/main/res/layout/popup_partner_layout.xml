@@ -32,6 +32,7 @@
             android:layout_marginTop="15dp"/>
 
         <TextView
+            android:id="@+id/tv_popup_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -42,6 +43,7 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/tv_popup_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="nguyenkien15969@gmail.com"
@@ -50,6 +52,7 @@
             android:textStyle="italic"/>
 
         <TextView
+            android:id="@+id/tv_popup_address"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -59,6 +62,7 @@
             android:textColor="@color/colorPrimary"/>
 
         <TextView
+            android:id="@+id/tv_popup_phone"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_width="wrap_content"
@@ -67,6 +71,7 @@
             android:textColor="@color/colorPrimary"/>
 
         <TextView
+            android:id="@+id/tv_popup_cmnd"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_width="wrap_content"
