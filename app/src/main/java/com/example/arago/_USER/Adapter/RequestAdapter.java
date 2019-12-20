@@ -70,12 +70,12 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         final Request request = arrPartner.get(position);
 
         holder.tvNameService.setText(request.getRequest_service_name());
-        holder.tvName.setText(request.getRequest_customer_name());
-        holder.tvPhone.setText(request.getRequest_customer_phone());
-        holder.tvAddress.setText(request.getRequest_customer_address());
-        holder.tvDate.setText(request.getRequest_datetime());
-        holder.tvMota.setText(request.getRequest_errortype());
-        holder.tvPrice.setText(request.getRequest_price());
+        holder.tvName.setText("Tên: " + request.getRequest_customer_name());
+        holder.tvPhone.setText("Di động: " + request.getRequest_customer_phone());
+        holder.tvAddress.setText("Địa chỉ: " + request.getRequest_customer_address());
+        holder.tvDate.setText("Ngày: " + request.getRequest_datetime());
+        holder.tvMota.setText("Mô tả: " + request.getRequest_errortype());
+        holder.tvPrice.setText("Giá: " + request.getRequest_price());
 
         holder.imgAccept.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,10 +5,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="6dp"
-    card_view:cardElevation="5dp"
-    card_view:cardCornerRadius="10dp"
-    card_view:cardBackgroundColor="#E7E6E6">
+    card_view:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_margin="10dp"
@@ -27,50 +24,78 @@
                 android:id="@+id/tv_cell_name_partner_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/darkTextColor"
                 android:text="Tên dịch vụ: "/>
 
             <TextView
-                android:id="@+id/tv_cell_date_partner_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ngày đặt: "/>
-
-            <TextView
+                android:layout_marginLeft="10dp"
                 android:id="@+id/tv_cell_customer_name_partner_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tên khách hàng: "/>
 
             <TextView
+                android:layout_marginLeft="10dp"
                 android:id="@+id/tv_cell_customer_phone_partner_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Số điện thoại: "/>
 
-            <TextView
-                android:id="@+id/tv_cell_customer_address_partner_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Địa chỉ: "/>
+<!--            <TextView-->
+<!--                android:id="@+id/tv_cell_date_partner_history"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Ngày đặt: "-->
+<!--                android:layout_marginRight="15dp"/>-->
 
-            <TextView
-                android:id="@+id/tv_cell_problem_partner_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mô tả: "/>
+<!--            <TextView-->
+<!--                android:id="@+id/tv_cell_customer_address_partner_history"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Địa chỉ: "/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_cell_problem_partner_history"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Mô tả: "/>-->
 
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_cell_price_partner_history"
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginRight="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Price: 100$"
-        android:gravity="end"
-        android:textColor="#FF0500"
-        android:layout_gravity="center_vertical"
-        android:layout_marginRight="15dp"/>
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="i"
+            android:background="@drawable/circle_background_gray"
+            android:src="@drawable/circle_background" />
+
+        <TextView
+            android:id="@+id/tv_cell_price_partner_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price: 100$"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="end" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#DADADA"/>
 
 </androidx.cardview.widget.CardView>

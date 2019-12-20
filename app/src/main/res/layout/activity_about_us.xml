@@ -38,6 +38,10 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#DADADA"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -47,6 +51,7 @@
         android:paddingRight="10dp">
 
         <ImageView
+            android:layout_marginTop="10dp"
             android:id="@+id/imgarago"
             android:layout_width="match_parent"
             android:layout_height="100dp"

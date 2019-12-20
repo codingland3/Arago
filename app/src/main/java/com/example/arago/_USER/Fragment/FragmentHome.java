@@ -45,7 +45,6 @@ public class FragmentHome extends Fragment {
 
     public static final String ID = "id";
 
-
     String[] values = {
             "Thợ sửa nước",
             "Thợ điện lạnh",
@@ -69,16 +68,17 @@ public class FragmentHome extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_main, container, false);
         init();
-    tvHello=view.findViewById(R.id.textViewUser);
-    circleImageView=view.findViewById(R.id.profileCircleImageView);
-    circleImageView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent=new Intent(getActivity(), UserActivity.class);
-            startActivity(intent);
-        }
+        tvHello=view.findViewById(R.id.textViewUser);
+        circleImageView=view.findViewById(R.id.profileCircleImageView);
+
+        circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), UserActivity.class);
+                startActivity(intent);
+            }
     });
-//
+
 //        MainActivity activity = (MainActivity) getActivity();
 //
 //        Bundle hm = activity.getDataOfFacebookFromMainActivity();
@@ -100,11 +100,10 @@ public class FragmentHome extends Fragment {
             String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
 
-            tvHello.setText("xin chao "+personName);
+            tvHello.setText("Xin chào " + personName);
             Glide.with(this).load(String.valueOf(personPhoto)).into(circleImageView);
-
-
         }
+
         gridServices = (GridView) view.findViewById(R.id.main_gv_services);
         main_gridAdapter = new Main_GridAdapter(getContext(), values, images);
         gridServices.setAdapter(main_gridAdapter);

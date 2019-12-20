@@ -5,10 +5,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="6dp"
-    card_view:cardElevation="5dp"
-    card_view:cardCornerRadius="10dp"
-    card_view:cardBackgroundColor="#E7E6E6">
+    card_view:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_margin="10dp"
@@ -17,19 +14,20 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
             <TextView
+                android:textColor="@color/darkTextColor"
+                android:textSize="16sp"
                 android:id="@+id/tv_cell_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:text="Name: "/>
 
             <TextView
+                android:layout_marginLeft="10dp"
                 android:id="@+id/tv_cell_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,6 +44,11 @@
         android:gravity="end"
         android:textColor="#FF0500"
         android:layout_gravity="center_vertical"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginRight="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#DADADA"/>
 
 </androidx.cardview.widget.CardView>

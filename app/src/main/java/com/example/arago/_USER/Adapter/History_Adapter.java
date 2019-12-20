@@ -57,8 +57,8 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
         final History history = arrHistory.get(position);
 
         holder.tvName.setText(history.getName());
-        holder.tvDate.setText("Ngày đặt: " + history.getDate());
-        holder.tvPrice.setText(history.getPrice() + " VND");
+        holder.tvDate.setText("Ngày đặt: " + history.getDate().trim());
+        holder.tvPrice.setText(history.getPrice() + "\nVND");
     }
 
     @Override

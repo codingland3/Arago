@@ -19,6 +19,7 @@ public class PartnerHistory {
         this.history_price = history_price;
     }
 
+
     public String getHistory_customer_name() {
         return history_customer_name;
     }

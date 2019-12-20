@@ -4,8 +4,36 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    style="@style/parent.contentLayout">
+    android:layout_height="match_parent">
+
+    <!-- ToolBar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_marginRight="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lịch sử"
+                android:textColor="@color/colorAccent"
+                android:textSize="18dp"/>
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#DADADA"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_partner_history"
