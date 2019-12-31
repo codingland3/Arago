@@ -111,8 +111,9 @@
                 android:id="@+id/profileUserID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
+                android:layout_marginLeft="45dp"
                 android:text="001 - Tài khoản Facebook"
+                android:maxLength="25"
                 android:layout_gravity="center"
                 android:textSize="16sp"/>
 

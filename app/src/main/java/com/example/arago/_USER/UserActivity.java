@@ -16,9 +16,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.arago.DAO.CustomerDAO;
+import com.example.arago.DAO.HistoryDAO;
+import com.example.arago.DAO.PartnerDAO;
 import com.example.arago.GetStartedActivity;
+import com.example.arago.LoginActivity;
+import com.example.arago.Model.Customer;
+import com.example.arago.Model.Request;
 import com.example.arago.R;
+import com.example.arago._ADMIN.Adapter.CustomerAdapter;
 import com.example.arago._USER.Adapter.User_GridAdapter;
+import com.example.arago._USER.Model.History;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,6 +36,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,12 +53,17 @@ public class UserActivity extends AppCompatActivity {
     User_GridAdapter user_gridAdapter;
     Integer change_password = 0, update_address = 1, service_manager = 2;
     EditText change_pass_old_pass, change_pass_new_pass, change_pass_new_pass_confirm;
-    TextView tvten,tvid;
+    TextView tvten, tvid, tvAddress, tvPhone;
+    public String id = "Mã người dùng", name = "Tên", phone = "Số điện thoại", address = "Địa chỉ";
     CircleImageView circleImageView2;
     private FirebaseAuth auth;
     GoogleSignInClient mGoogleSignInClient;
     Button btnlogout;
     View v;
+
+    List<Customer> customers = new ArrayList<Customer>();
+
+    DatabaseReference mDatabase;
 
     String[] values = {
             "Đặt lại mật khẩu",
@@ -62,11 +83,38 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_information);
         tvid=findViewById(R.id.profileUserID);
         tvten=findViewById(R.id.profileUsername);
+        tvAddress = findViewById(R.id.profileUserAddress);
+        tvPhone = findViewById(R.id.profileUserPhone);
+
         circleImageView2=findViewById(R.id.profileCircleImageView2);
         // Tham chiếu và đưa dữ liệu lên gridview
         gridView = (GridView) findViewById(R.id.gv_user_information);
         user_gridAdapter = new User_GridAdapter(this, values, images);
         gridView.setAdapter(user_gridAdapter);
+
+        CustomerDAO customerDAO = new CustomerDAO(UserActivity.this);
+        customers = customerDAO.getAll();
+
+        // Chổ này lấy tài tài khoản hiện tại, so sánh với email bên trong database để lấy thông tin cần thiết ra bên ngoài
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String email = currentUser.getEmail();
+        for (int j = 0; j <= customers.size() - 1; j++) {
+            if (customers.size() > 0) {
+                if (email.equals(customers.get(j).getCustomer_email())) {
+                    name = customers.get(j).getCustomer_name();
+                    id = customers.get(j).getCustomer_id();
+                    address = customers.get(j).getCustomer_address();
+                    phone = customers.get(j).getCustomer_phone();
+                }
+            }
+        }
+        tvten.setText(name);
+        tvid.setText(id);
+        tvAddress.setText(address);
+        tvPhone.setText(phone);
+
+
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -113,12 +161,14 @@ public class UserActivity extends AppCompatActivity {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
             String personName = acct.getDisplayName();
-
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
+            String personPhone = "Chưa cập nhật";
+            String personAddress = "Chưa cập nhật";
+            String personId = "Tài khoản Google - " + acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
             tvid.setText(personId);
             tvten.setText(personName);
+            tvPhone.setText(personPhone);
+            tvAddress.setText(personAddress);
             Glide.with(this).load(String.valueOf(personPhoto)).into(circleImageView2);
         }
     }
@@ -128,7 +178,6 @@ public class UserActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        // ...
                        Intent intent=new Intent(UserActivity.this,GetStartedActivity.class);
                        startActivity(intent);
                     }
@@ -148,7 +197,7 @@ public class UserActivity extends AppCompatActivity {
         finish();
     }
 
-
+    // TRUNG ???
     private void revokeAccess() {
         mGoogleSignInClient.revokeAccess()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {

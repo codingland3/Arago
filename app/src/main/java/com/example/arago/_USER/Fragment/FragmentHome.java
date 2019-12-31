@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.arago.DAO.CustomerDAO;
+import com.example.arago.Model.Customer;
 import com.example.arago.R;
 import com.example.arago._USER.Adapter.Main_CardViewAdapter;
 import com.example.arago._USER.Adapter.Main_GridAdapter;
@@ -25,6 +27,8 @@ import com.example.arago._USER.JobList;
 import com.example.arago._USER.UserActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +46,8 @@ public class FragmentHome extends Fragment {
     List<Event> events;
     TextView tvHello;
     CircleImageView circleImageView;
+
+    private FirebaseAuth auth;
 
     public static final String ID = "id";
 
@@ -90,14 +96,47 @@ public class FragmentHome extends Fragment {
 
 //        new FragmentHome().downloadImage(circleImageView).execute(imageUrl);
 
+        List<Customer> customers = new ArrayList<Customer>();
+        CustomerDAO customerDAO = new CustomerDAO(getContext());
+        customers = customerDAO.getAll();
+
+        // Chổ này lấy tài tài khoản hiện tại, so sánh với email bên trong database để lấy thông tin cần thiết ra bên ngoài
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        String email = currentUser.getEmail();
+        String indexName = "";
+        for (int j = 0; j <= customers.size() - 1; j++) {
+            if (customers.size() > 0) {
+                if (email.equals(customers.get(j).getCustomer_email())) {
+                    String[] name = customers.get(j).getCustomer_name().toUpperCase().split("\\ ");
+
+                    if (name.length == 4){
+                        indexName = name[3];
+                        break;
+                    }
+                    if (name.length == 3){
+                        indexName = name[2];
+                        break;
+                    }
+                    if (name.length == 2){
+                        indexName = name[1];
+                        break;
+                    }
+                    else {
+                        indexName = name[0];
+                        break;
+                    }
+                }
+            }
+        }
+        tvHello.setText("XIN CHÀO " + indexName+"!");
+        tvHello.setTextSize(20);
+
 
         // Tham chiếu và đưa dữ liệu lên gridview
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
         if (acct != null) {
             String personName = acct.getDisplayName();
-
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
 
             tvHello.setText("Xin chào " + personName);
