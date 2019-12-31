@@ -6,19 +6,26 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.arago.DAO.HistoryDAO;
+import com.example.arago.DAO.PartnerDAO;
 import com.example.arago.DAO.RequestDAO;
+import com.example.arago.Model.Partner;
 import com.example.arago.Model.Request;
 import com.example.arago.R;
 import com.example.arago._USER.Model.History;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 import java.util.Calendar;
 
@@ -82,6 +89,42 @@ public class OrderActivity extends AppCompatActivity {
                 String request_service_name = service_name;
                 String request_price = price;
                 int request_id = 1;
+
+                if (request_customer_name.isEmpty()) {
+                    edtName.setError("Không được bỏ trống trường này");
+                    edtName.requestFocus();
+                    return;
+                }
+
+                if (request_customer_phone.isEmpty()) {
+                    edtPhone.setError("Không được bỏ trống trường này");
+                    edtPhone.requestFocus();
+                    return;
+                }
+
+                if (request_customer_phone.length() != 10) {
+                    edtPhone.setError("Nhập sai trường này");
+                    edtPhone.requestFocus();
+                    return;
+                }
+
+                if (request_customer_address.isEmpty()) {
+                    edtAddress.setError("Không được bỏ trống trường này");
+                    edtAddress.requestFocus();
+                    return;
+                }
+
+                if (request_customer_address.length() <= 10) {
+                    edtAddress.setError("Nhập sai trường này");
+                    edtAddress.requestFocus();
+                    return;
+                }
+
+                if (request_datetime.isEmpty()) {
+                    tvDate.setError("Không được bỏ trống trường này");
+                    tvDate.requestFocus();
+                    return;
+                }
 
                 // Tạo bảng request cho cộng tác viên
                 requestDAO = new RequestDAO(OrderActivity.this);
