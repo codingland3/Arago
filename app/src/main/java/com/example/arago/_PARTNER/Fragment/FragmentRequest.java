@@ -65,6 +65,7 @@ public class FragmentRequest extends Fragment {
 
         adapter=new RequestAdapter(getActivity(),requestList,this);
         rv_Request.setAdapter(adapter);
+
         return view;
     }
 

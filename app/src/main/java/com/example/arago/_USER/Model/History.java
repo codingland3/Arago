@@ -2,15 +2,24 @@ package com.example.arago._USER.Model;
 
 public class History {
 
-    private String Name, Date, Price;
+    private String Name, Date, Price, CustomerID;
 
     public History() {
     }
 
-    public History(String name, String date, String price) {
+    public History(String name, String date, String price, String customerID) {
         Name = name;
         Date = date;
         Price = price;
+        CustomerID = customerID;
+    }
+
+    public String getCustomerID() {
+        return CustomerID;
+    }
+
+    public void setCustomerID(String customerID) {
+        CustomerID = customerID;
     }
 
     public String getName() {

@@ -5,13 +5,17 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.arago.Model.Customer;
 import com.example.arago.NonUI;
 import com.example.arago._USER.Fragment.FragmentHistory;
 import com.example.arago._USER.Model.History;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,26 @@ public class HistoryDAO {
         this.context = context;
         this.nonUI = new NonUI(context);
         this.fragmentHistory = fr;
+    }
+
+    public List<History> getAll() {
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Customer object and use the values to update the UI
+                list.clear();
+                for (DataSnapshot data:dataSnapshot.getChildren()){
+                    History item = data.getValue(History.class);
+                    list.add(item);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                nonUI.toast("Không kết nối Database");
+            }
+        };
+        mDatabase.addValueEventListener(listener);
+        return list;
     }
 
     public void insert(History item) {

@@ -37,21 +37,22 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FragmentHome extends Fragment {
 
-    GridView gridServices;
-    Main_GridAdapter main_gridAdapter;
-    Integer suanuoc = 0, dienlanh = 1, suadien = 2, xaydung = 3, it = 4, giupviec = 5;
+    private TextView tvHello;
+    private CircleImageView circleImageView;
 
-    ViewPager viewPager;
-    Main_CardViewAdapter cardViewAdapter;
-    List<Event> events;
-    TextView tvHello;
-    CircleImageView circleImageView;
+    private GridView gridServices;
+    private Main_GridAdapter main_gridAdapter;
+    private int suanuoc = 0, dienlanh = 1, suadien = 2, xaydung = 3, it = 4, giupviec = 5;
+
+    private ViewPager viewPager;
+    private Main_CardViewAdapter cardViewAdapter;
+    private List<Event> events;
 
     private FirebaseAuth auth;
 
     public static final String ID = "id";
 
-    String[] values = {
+    private String[] values = {
             "Thợ sửa nước",
             "Thợ điện lạnh",
             "Thợ sửa điện",
@@ -60,7 +61,7 @@ public class FragmentHome extends Fragment {
             "Người giúp việc"
     };
 
-    int[] images = {
+    private int[] images = {
             R.drawable.tho_sua_nuoc,
             R.drawable.tho_trang_diem,
             R.drawable.tho_sua_dien,
@@ -73,28 +74,27 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_main, container, false);
-        init();
-        tvHello=view.findViewById(R.id.textViewUser);
-        circleImageView=view.findViewById(R.id.profileCircleImageView);
+        // init
+        circleImageView = view.findViewById(R.id.profileCircleImageView);
+        tvHello = view.findViewById(R.id.textViewUser);
+        gridServices = view.findViewById(R.id.main_gv_services);
+        viewPager = view.findViewById(R.id.main_viewPager_event);
 
-        circleImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), UserActivity.class);
-                startActivity(intent);
-            }
-    });
+        circleImageViewOnClick();
 
-//        MainActivity activity = (MainActivity) getActivity();
-//
-//        Bundle hm = activity.getDataOfFacebookFromMainActivity();
-//        String name = hm.getString("name");
-//        String surname = hm.getString("surname");
-//        String avatar = hm.getString("imgUrl");
-//
-//        tvHello.setText("Xin chào " + name);
+        getUserInformationFireBase();
+        getUserInformationGoogle();
+        getUserInformationFacebook();
 
-//        new FragmentHome().downloadImage(circleImageView).execute(imageUrl);
+        serviceOnItemClick();
+
+        eventShowInfo();
+
+        return view;
+    }
+
+    // Lấy thông tin người dùng từ firebase để show lên trang cá nhân.
+    public void getUserInformationFireBase(){
 
         List<Customer> customers = new ArrayList<Customer>();
         CustomerDAO customerDAO = new CustomerDAO(getContext());
@@ -109,7 +109,7 @@ public class FragmentHome extends Fragment {
             if (customers.size() > 0) {
                 if (email.equals(customers.get(j).getCustomer_email())) {
                     String[] name = customers.get(j).getCustomer_name().toUpperCase().split("\\ ");
-
+                    // Xử lý chuổi để tìm ra tên
                     if (name.length == 4){
                         indexName = name[3];
                         break;
@@ -131,9 +131,11 @@ public class FragmentHome extends Fragment {
         }
         tvHello.setText("XIN CHÀO " + indexName+"!");
         tvHello.setTextSize(20);
+    }
 
 
-        // Tham chiếu và đưa dữ liệu lên gridview
+    // Lấy thông tin người dùng từ google để show lên trang cá nhân.
+    public void getUserInformationGoogle(){
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
         if (acct != null) {
             String personName = acct.getDisplayName();
@@ -142,8 +144,29 @@ public class FragmentHome extends Fragment {
             tvHello.setText("Xin chào " + personName);
             Glide.with(this).load(String.valueOf(personPhoto)).into(circleImageView);
         }
+    }
 
-        gridServices = (GridView) view.findViewById(R.id.main_gv_services);
+
+    // Lấy thông tin người dùng từ facebook để show lên trang cá nhân.
+    public void getUserInformationFacebook(){
+        //        MainActivity activity = (MainActivity) getActivity();
+//
+//        Bundle hm = activity.getDataOfFacebookFromMainActivity();
+//        String name = hm.getString("name");
+//        String surname = hm.getString("surname");
+//        String avatar = hm.getString("imgUrl");
+//
+//        tvHello.setText("Xin chào " + name);
+
+//        new FragmentHome().downloadImage(circleImageView).execute(imageUrl);
+
+    }
+
+
+    // Show và bắt sự kiện click cho các dịch vụ.
+    public void serviceOnItemClick(){
+
+        // Tham chiếu và đưa dữ liệu lên gridview
         main_gridAdapter = new Main_GridAdapter(getContext(), values, images);
         gridServices.setAdapter(main_gridAdapter);
 
@@ -185,22 +208,30 @@ public class FragmentHome extends Fragment {
                 // </Code>
             }
         });
+    }
 
-        //
+
+    // Bắt sự kiện click vào ảnh đại diện người dùng.
+    public void circleImageViewOnClick(){
+        circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), UserActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    // Show event.
+    public void eventShowInfo(){
         events = new ArrayList<>();
         events.add(new Event(R.drawable.handphone, "Khuyến mãi 50% phí sử dụng dịch vụ", "Mừng ra mắt ứng dụng, Arago khuyến mãi 50% phí sử dụng tất cả các dịch vụ", "Xem chi tiết"));
         events.add(new Event(R.drawable.customer, "Tri ân khách hàng thân thiết của Arago", "Khuyến mãi 10% cho khách hàng đủ 10 lần sử dụng dịch vụ của Arago trong tháng", "Xem chi tiết"));
         events.add(new Event(R.drawable.hoamai, "Khuyến mãi 5% từ ngày 25 đến 28 Tết", "Nhân dịp lễ Tết, Arago khuyến mãi 5% cho khách hàng sử dụng dịch vụ xây dựng và giúp việc", "Xem chi tiết"));
 
         cardViewAdapter = new Main_CardViewAdapter(events, getContext());
-        viewPager = view.findViewById(R.id.main_viewPager_event);
         viewPager.setAdapter(cardViewAdapter);
         viewPager.setPadding(130,0, 130, 0);
-        return view;
-    }
-
-    public void init (){
-        tvHello = getActivity().findViewById(R.id.textViewUser);
-        circleImageView = getActivity().findViewById(R.id.profileCircleImageView);
     }
 }

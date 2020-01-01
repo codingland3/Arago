@@ -16,9 +16,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.arago.DAO.CustomerDAO;
 import com.example.arago.DAO.HistoryDAO;
 import com.example.arago.DAO.PartnerDAO;
 import com.example.arago.DAO.RequestDAO;
+import com.example.arago.Model.Customer;
 import com.example.arago.Model.Partner;
 import com.example.arago.Model.Request;
 import com.example.arago.R;
@@ -26,17 +28,25 @@ import com.example.arago._USER.Model.History;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class OrderActivity extends AppCompatActivity {
-    TextView txtClickButton, txtBillPrice;
+    TextView tvClickOrderService, txtBillPrice;
     HistoryDAO historyDAO;
     RequestDAO requestDAO;
     EditText edtName,edtPhone,edtAddress, edtTime, edtProblem;
     TextView tvDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     static final String TAG="QLSV";
+    private FirebaseAuth auth;
+    String current_customer_id = "";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,9 +86,30 @@ public class OrderActivity extends AppCompatActivity {
         } ;
 
 
-        txtClickButton.setOnClickListener(new View.OnClickListener() {
+        tvClickOrderService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // get id current user
+                // ĐẦU TIÊN SẼ LẤY THÔNG TIN NGƯỜI DÙNG HIỆN TẠI - SAU ĐÓ SO SÁNH EMAIL VỚI THÔNG TIN TRÊN FIREBASE
+                // NẾU THÔNG TIN NÀO KHỚP SẼ LẤY ID CỦA NGƯỜI ĐÓ VỀ VÀ GÁN VÀO BIẾN customer_id
+                List<Customer> customers = new ArrayList<Customer>();
+                CustomerDAO customerDAO = new CustomerDAO(OrderActivity.this);
+                customers = customerDAO.getAll();
+
+                // Chổ này lấy tài tài khoản hiện tại, so sánh với email bên trong database
+                auth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = auth.getCurrentUser();
+                String email = currentUser.getEmail();
+                for (int j = 0; j <= customers.size() - 1; j++) {
+                    if (customers.size() > 0) {
+                        if (email.equals(customers.get(j).getCustomer_email())) {
+                            current_customer_id = customers.get(j).getCustomer_id();
+                        }
+                    }
+                }
+
+
                 String time = tvDate.getText().toString();
 
                 String request_customer_name = edtName.getText().toString();
@@ -133,7 +164,7 @@ public class OrderActivity extends AppCompatActivity {
 
                 // Tạo bảng lịch sử của khách hàng
                 historyDAO = new HistoryDAO(OrderActivity.this);
-                History history = new History(service_name, time, price);
+                History history = new History(service_name, time, price, current_customer_id);
                 historyDAO.insert(history);
                 Toast.makeText(OrderActivity.this, "Đặt thành công", Toast.LENGTH_SHORT).show();
             }
@@ -142,7 +173,7 @@ public class OrderActivity extends AppCompatActivity {
 
     private void anhxa() {
         txtBillPrice = (TextView) findViewById(R.id.bill_price);
-        txtClickButton=(TextView)findViewById(R.id.tvClickCreatePartnerAccount);
+        tvClickOrderService=(TextView)findViewById(R.id.tvClickOrderService);
         edtName=(EditText)findViewById(R.id.request_customer_name);
         edtPhone=(EditText)findViewById(R.id.request_customer_phone);
         edtAddress=(EditText)findViewById(R.id.request_customer_address);
