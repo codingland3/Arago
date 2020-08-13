@@ -15,7 +15,7 @@ public class FragmentEvent extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_user_information, container, false);
+        View view = inflater.inflate(R.layout.layout_event, container, false);
         return view;
     }
 }

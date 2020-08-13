@@ -1,20 +1,28 @@
 package com.example.arago._USER;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.arago.DAO.CustomerDAO;
 import com.example.arago.DAO.HistoryDAO;
@@ -47,12 +55,19 @@ public class OrderActivity extends AppCompatActivity {
     String current_customer_id = "";
 
 
+    // Ảnh chụp lỗi sản phẩm
+    ImageView img01, img02, img03;
+    private static final int REQUEST_ID_IMAGE_CAPTURE = 100;
+    private boolean cam01 = false, cam02 = false, cam03 = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_order);
         anhxa();
 
+        // Get giá tiền
         Intent intent = getIntent();
         final String price = intent.getStringExtra(JobDetails.PRICE);
         final String service_name = intent.getStringExtra(JobDetails.SERVICE_NAME);
@@ -86,10 +101,30 @@ public class OrderActivity extends AppCompatActivity {
         } ;
 
 
+        img01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                captureImage();
+            }
+        });
+
+        img02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                captureImage();
+            }
+        });
+
+        img03.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                captureImage();
+            }
+        });
+
         tvClickOrderService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 // get id current user
                 // ĐẦU TIÊN SẼ LẤY THÔNG TIN NGƯỜI DÙNG HIỆN TẠI - SAU ĐÓ SO SÁNH EMAIL VỚI THÔNG TIN TRÊN FIREBASE
                 // NẾU THÔNG TIN NÀO KHỚP SẼ LẤY ID CỦA NGƯỜI ĐÓ VỀ VÀ GÁN VÀO BIẾN customer_id
@@ -171,6 +206,46 @@ public class OrderActivity extends AppCompatActivity {
         });
     }
 
+    private void captureImage() {
+        // Create an implicit intent, for image capture.
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Start camera and wait for the results.
+        this.startActivityForResult(intent, REQUEST_ID_IMAGE_CAPTURE);
+    }
+
+    // When results returned
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ID_IMAGE_CAPTURE) {
+            if (resultCode == RESULT_OK) {
+                Bitmap bp = (Bitmap) data.getExtras().get("data");
+//                img01.setTag(R.drawable.ic_photo_camera);
+//                String drawableId = (String)img01.getTag(); //When you fetch the drawable id
+//                img02.setTag(R.id.image02, R.drawable.ic_photo_camera); //Set
+
+//                Toast.makeText(this, drawableId, Toast.LENGTH_SHORT).show();
+                if (cam01==false){
+                    this.img01.setImageBitmap(bp);
+                    cam01 = true;
+                } else if (cam02==false){
+                    this.img02.setImageBitmap(bp);
+                    cam02 = true;
+                } else if (cam03==false){
+                    this.img03.setImageBitmap(bp);
+                    cam03 = true;
+                } else {
+                    this.img03.setImageBitmap(bp);
+                }
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Action canceled", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Action Failed", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
     private void anhxa() {
         txtBillPrice = (TextView) findViewById(R.id.bill_price);
         tvClickOrderService=(TextView)findViewById(R.id.tvClickOrderService);
@@ -179,5 +254,8 @@ public class OrderActivity extends AppCompatActivity {
         edtAddress=(EditText)findViewById(R.id.request_customer_address);
         edtProblem=(EditText)findViewById(R.id.request_problem);
         tvDate = (TextView) findViewById(R.id.request_time);
+        img01 = (ImageView) findViewById(R.id.image01);
+        img02 = (ImageView) findViewById(R.id.image02);
+        img03 = (ImageView) findViewById(R.id.image03);
     }
 }

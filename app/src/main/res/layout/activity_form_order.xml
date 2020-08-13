@@ -208,6 +208,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/image01"
                     android:src="@drawable/ic_photo_camera"
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/colorAccent"
@@ -216,6 +217,7 @@
                     android:layout_height="70dp"/>
 
                 <ImageView
+                    android:id="@+id/image02"
                     android:src="@drawable/ic_photo_camera"
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/colorAccent"
@@ -225,6 +227,7 @@
                     android:layout_height="70dp"/>
 
                 <ImageView
+                    android:id="@+id/image03"
                     android:src="@drawable/ic_photo_camera"
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/colorAccent"
